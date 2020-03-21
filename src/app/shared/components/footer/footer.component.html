@@ -1,0 +1,32 @@
+<footer *ngIf="dataset">
+  <div class="textHeader">Current Covid-19 Data for Austria</div>
+  <div class="tableOut2">
+    <table class="table2" style="width:500px">
+      <tbody>
+      <tr>
+        <td class="row3">Cases:</td>
+        <td class="row3">{{dataset.countrydata[0].total_cases}} (+{{dataset.countrydata[0].total_new_cases_today}})</td>
+      </tr>
+
+      <tr>
+        <td class="row3">Recovered:</td>
+        <td class="row3">{{dataset.countrydata[0].total_recovered}}</td>
+      </tr>
+
+      <tr>
+        <td class="row3">Source:</td>
+        <td class="row3">{{dataset.info.source}}</td>
+      </tr>
+
+      </tbody>
+    </table>
+  </div>
+  <div class="spacer40"></div>
+
+
+  <!-- ---------------------------------------------------------------------------------------------------------------------- -->
+
+  <div class="text">
+    &#169; All rights reserved for <em>ESN Buddynetwork TU Wien</em> 2020.
+  </div>
+</footer>
