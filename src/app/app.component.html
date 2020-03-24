@@ -239,7 +239,6 @@
         <label for="uni">Your university</label>
 
         <select class="form-control" id="uni" required [(ngModel)]="model.uni" name="uni">
-          <option [ngValue]="null">Select University</option>
           <option *ngFor="let uni of universities"
                   [ngValue]="uni">{{uni.name}}</option>
         </select>
@@ -273,12 +272,12 @@
         <input type="number" class="form-control" id="plank" placeholder="How many seconds did you plank?"
                [(ngModel)]="model.planks" name="plank">
       </div>
+      <button (click)="modal.close('Save click');submit(model);" [disabled]="!appWorkoutForm.form.valid"
+              class="btn btn-primary"
+              type="submit">
+        Submit
+      </button>
     </form>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="modal.close('Save click');submit(model);"
-            [disabled]="!appWorkoutForm.form.valid">Submit
-    </button>
   </div>
 </ng-template>
 

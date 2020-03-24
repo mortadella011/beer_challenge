@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
   }
 
   submit(model: InputDataModel) {
-    console.log('submit');
+    console.log(model);
     this.submitted = true;
     this.workoutService.submitWorkout(model).subscribe((res) => {
       console.log(res);

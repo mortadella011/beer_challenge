@@ -11,11 +11,11 @@ export class UniversityDataModel {
 }
 
 export class UniversityModel {
-  id: number;
+  uniId: number;
   name: string;
 
-  constructor(id: number, name: string) {
-    this.id = id;
+  constructor(uniId: number, name: string) {
+    this.uniId = uniId;
     this.name = name;
   }
 }
