@@ -86,13 +86,13 @@
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let data of universityData; index as i">
+            <tr *ngFor="let data of uniData; index as i">
               <th class="row1" scope="row">{{ i + 1 }}</th>
-              <td class="rowUniversity">{{ data.uni.name }}</td>
-              <td class="row1">{{ data.stat[0].stat | number }} {{ data.stat[0].sport.unit }}</td>
-              <td class="row1">{{ data.stat[1].stat | number }} {{ data.stat[1].sport.unit }}</td>
-              <td class="row1">{{ data.stat[2].stat | number }} {{ data.stat[2].sport.unit }}</td>
-              <td class="row1">{{ data.stat[3].stat | number }} {{ data.stat[3].sport.unit }}</td>
+              <td class="rowUniversity">{{ uniData.get(i).get(0).uni }}</td>
+              <td class="row1">{{ uniData.get(i).get(1).amount  }}</td>
+              <td class="row1">{{ uniData.get(i).get(2).amount  }}</td>
+              <td class="row1">{{ uniData.get(i).get(3).amount  }} </td>
+              <td class="row1">{{ uniData.get(i).get(4).amount  }} sec</td>
             </tr>
 
             </tbody>
@@ -242,11 +242,6 @@
           <option *ngFor="let uni of universities"
                   [ngValue]="uni">{{uni.name}}</option>
         </select>
-
-        <!--        <select class="form-control" id="uni" required [(ngModel)]="model.uni" name="uni">-->
-        <!--          <option selected></option>-->
-        <!--          <option *ngFor="let uni of universities" [value]="uni">{{uni.name}}</option>-->
-        <!--        </select>-->
       </div>
 
       <div class="form-group">

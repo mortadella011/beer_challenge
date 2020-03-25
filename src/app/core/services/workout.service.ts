@@ -3,7 +3,7 @@ import {InputDataModel} from '../../shared/models/input-data.model';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {flatMap, map} from 'rxjs/operators';
-import {WorkoutData} from '../../shared/models/sport-stat.model';
+import {UniWorkoutData, WorkoutData} from '../../shared/models/sport-stat.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,17 +37,28 @@ export class WorkoutService {
     return this.http.post(this.urlWorkout + '/data', {workout: workout, sport: sport, amount: amount});
   }
 
-  getAllWorkouts(): Observable<Map<number, number>> {
-    return this.http.get<WorkoutData[]>(this.urlWorkout).pipe(
+  getAllWorkoutData(): Observable<Map<number, WorkoutData>> {
+    return this.http.get<WorkoutData[]>(this.urlWorkout + '/data').pipe(
       map(dataList => {
-        console.log(dataList);
-        return dataList.reduce(
-          (sportMap, data) => {
-            const amount = ((sportMap.has(data.sportId)) ? sportMap.get(data.sportId) : 0) + data.amount;
-            sportMap.set(data.sportId, amount);
-            return sportMap;
-          }, new Map<number, number>()
-        );
+        return dataList.reduce((sportMap, data) => {
+          sportMap.set(data.sportId, data);
+          return sportMap;
+        }, new Map<number, WorkoutData>());
+      })
+    );
+  }
+
+  getAllWorkoutsPerUni(): Observable<Map<number, Map<number, UniWorkoutData>>> {
+    return this.http.get<UniWorkoutData[]>(this.urlWorkout).pipe(
+      // group by uni
+      map(dataList => {
+        return dataList.reduce((uniMap, data) => {
+          if (!uniMap.has(data.uniId)) {
+            uniMap.set(data.uniId, new Map<number, UniWorkoutData>());
+          }
+          uniMap.get(data.uniId).set(data.sportId, data);
+          return uniMap;
+        }, new Map<number, Map<number, UniWorkoutData>>());
       })
     );
   }

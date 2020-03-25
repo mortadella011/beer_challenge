@@ -6,6 +6,7 @@ import {CoronaDataService} from './core/services/corona-data.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {InputDataModel} from './shared/models/input-data.model';
 import {WorkoutService} from './core/services/workout.service';
+import {UniWorkoutData} from './shared/models/sport-stat.model';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,8 @@ export class AppComponent implements OnInit {
   universityData: UniversityDataModel[];
   virusTrackerData: VirusTrackerData;
   universities: UniversityModel[];
+
+  uniData: Map<number, Map<number, UniWorkoutData>>;
 
   totalPushUps: number;
   totalSitups: number;
@@ -54,19 +57,30 @@ export class AppComponent implements OnInit {
   submit(model: InputDataModel) {
     console.log(model);
     this.submitted = true;
-    this.workoutService.submitWorkout(model).subscribe((res) => {
-      console.log(res);
+    this.workoutService.submitWorkout(model).subscribe(() => {
       this.reloadData();
     });
   }
 
   reloadData() {
-    this.workoutService.getAllWorkouts().subscribe((data) => {
+    this.loadTotalData();
+    this.loadUniData();
+  }
+
+  private loadTotalData() {
+    this.workoutService.getAllWorkoutData().subscribe((data) => {
       console.log(data);
-      this.totalPushUps = data.has(1) ? data.get(1) : 0;
-      this.totalSitups = data.has(2) ? data.get(2) : 0;
-      this.totalSquats = data.has(3) ? data.get(3) : 0;
-      this.totalPlanking = data.has(4) ? data.get(4) : 0;
+      this.totalPushUps = data.has(1) ? data.get(1).amount : 0;
+      this.totalSitups = data.has(2) ? data.get(2).amount : 0;
+      this.totalSquats = data.has(3) ? data.get(3).amount : 0;
+      this.totalPlanking = data.has(4) ? data.get(4).amount : 0;
+    });
+  }
+
+  private loadUniData() {
+    this.workoutService.getAllWorkoutsPerUni().subscribe((data) => {
+      console.log(data);
+      this.uniData = data;
     });
   }
 }

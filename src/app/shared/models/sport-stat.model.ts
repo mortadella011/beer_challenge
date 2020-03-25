@@ -11,15 +11,29 @@ export class SportStatModel {
 }
 
 export class WorkoutData {
-  workoutDataId: number;
-  workoutId: number;
   sportId: number;
+  name: string;
   amount: number;
 
-  constructor(workoutDataId: number, workoutId: number, sportId: number, amount: number) {
-    this.workoutDataId = workoutDataId;
-    this.workoutId = workoutId;
+  constructor(sportId: number, name: string, amount: number) {
     this.sportId = sportId;
+    this.name = name;
+    this.amount = amount;
+  }
+}
+
+export class UniWorkoutData {
+  uni: string;
+  uniId: number;
+  sportId: number;
+  sport: string;
+  amount: number;
+
+  constructor(uni: string, uniId: number, sportId: number, sport: string, amount: number) {
+    this.uni = uni;
+    this.uniId = uniId;
+    this.sportId = sportId;
+    this.sport = sport;
     this.amount = amount;
   }
 }
