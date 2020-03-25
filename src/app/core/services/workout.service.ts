@@ -92,7 +92,7 @@ export class WorkoutService {
   }
 
   private submitWorkoutDataIntern(workout: string, sport: number, amount: number): Observable<any> {
-    const amountNorm = amount != null && amount >= 0 ? 0 : amount;
+    const amountNorm = amount != null && amount >= 0 ? amount : 0;
     return this.http.post(this.urlWorkout + '/data', {workout: workout, sport: sport, amount: amountNorm});
   }
 }
