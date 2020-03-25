@@ -33,21 +33,6 @@ export class WorkoutService {
     );
   }
 
-  private submitWorkoutDataIntern(workout: string, sport: number, amount: number): Observable<any> {
-    return this.http.post(this.urlWorkout + '/data', {workout: workout, sport: sport, amount: amount});
-  }
-
-  getAllWorkoutData(): Observable<Map<number, WorkoutData>> {
-    return this.http.get<WorkoutData[]>(this.urlWorkout + '/data').pipe(
-      map(dataList => {
-        return dataList.reduce((sportMap, data) => {
-          sportMap.set(data.sportId, data);
-          return sportMap;
-        }, new Map<number, WorkoutData>());
-      })
-    );
-  }
-
   getAllWorkoutsPerUni(): Observable<ReducedUniWorkoutData[]> {
     return this.http.get<UniWorkoutData[]>(this.urlWorkout).pipe(
       // group by uni
@@ -65,10 +50,10 @@ export class WorkoutService {
         const uniList = new Set<ReducedUniWorkoutData>();
         dataList.forEach((value, key) => {
 
-          const pushUps = value.get(1).amount;
-          const situps = value.get(2).amount;
-          const squats = value.get(3).amount;
-          const planking = value.get(4).amount;
+          const pushUps = (value.get(1) != null && value.get(1).amount >= 0) ? value.get(1).amount : 0;
+          const situps = (value.get(2) != null && value.get(2).amount >= 0) ? value.get(2).amount : 0;
+          const squats = (value.get(3) != null && value.get(3).amount >= 0) ? value.get(3).amount : 0;
+          const planking = (value.get(4) != null && value.get(4).amount >= 0) ? value.get(4).amount : 0;
 
           uniList.add({
             ranking: 0,
@@ -89,5 +74,21 @@ export class WorkoutService {
           });
       })
     );
+  }
+
+  getAllWorkoutData(): Observable<Map<number, WorkoutData>> {
+    return this.http.get<WorkoutData[]>(this.urlWorkout + '/data').pipe(
+      map(dataList => {
+        return dataList.reduce((sportMap, data) => {
+          sportMap.set(data.sportId, data);
+          return sportMap;
+        }, new Map<number, WorkoutData>());
+      })
+    );
+  }
+
+  private submitWorkoutDataIntern(workout: string, sport: number, amount: number): Observable<any> {
+    const amountNorm = amount != null && amount >= 0 ? 0 : amount;
+    return this.http.post(this.urlWorkout + '/data', {workout: workout, sport: sport, amount: amountNorm});
   }
 }
