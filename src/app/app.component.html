@@ -81,7 +81,7 @@
              <div class="col-12 col-sm-12 col-md-2 col-lg-3"></div>
              <div class="col-12 col-sm-12 col-md-8 col-lg-6">
 
-               <div class="boxb">
+               <div *ngIf="virusTrackerData" class="boxb">
                  <div class="boxHeaderBottom">Current Covid-19 Cases in Austria</div>
                  <div class="boxNumberBottom" style="color:#2e3192;">
                    {{virusTrackerData.countrydata[0].total_cases}}</div>
@@ -229,17 +229,17 @@
        </div> -->
 
 
-       <div class="row my-3">
+       <div *ngIf="virusTrackerData" class="row my-3">
          <div class="col-md-12">
            <h3>Current Covid-19 Data for Austria</h3>
 
 
            <table class="tableStats">
              <tbody>
-               <tr>
-                 <td class="row3">Cases: </td>
-                 <td class="row3"> {{virusTrackerData.countrydata[0].total_cases}} </td>
-               </tr>
+             <tr>
+               <td class="row3">Cases:</td>
+               <td class="row3"> {{virusTrackerData.countrydata[0].total_cases}} </td>
+             </tr>
 
                <tr>
                  <td class="row3">Recovered: </td>
