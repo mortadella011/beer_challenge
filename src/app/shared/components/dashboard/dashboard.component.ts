@@ -37,10 +37,10 @@ export class DashboardComponent implements OnInit {
 
   @ViewChildren(SortableHeaderDirective) headers: QueryList<SortableHeaderDirective>;
 
-  private uniService: UniversitiesService;
-  private coronaDataService: CoronaDataService;
-  private workoutService: WorkoutService;
-  private uniworkoutService: UniworkoutService;
+  public uniService: UniversitiesService;
+  public coronaDataService: CoronaDataService;
+  public workoutService: WorkoutService;
+  public uniworkoutService: UniworkoutService;
 
   constructor(@Inject(NgbModal) private modalService: NgbModal,
               @Inject(WorkoutService) workoutService: WorkoutService,
