@@ -44,9 +44,9 @@ function createRouter(db) {
   router.get('/workout/data', function (req, res, next) {
     db.query(
       'SELECT sport.sportId, sport.name, sum(amount) as amount ' +
-      'FROM workout AS workout ' +
-      'JOIN workout_data AS wdata ON wdata.workoutId = workout.workoutId ' +
-      'JOIN sport AS sport ON sport.sportId = wdata.sportId ' +
+      'FROM WORKOUT AS workout ' +
+      'JOIN WORKOUT_DATA AS wdata ON wdata.workoutId = workout.workoutId ' +
+      'JOIN SPORT AS sport ON sport.sportId = wdata.sportId ' +
       'GROUP BY sportId ',
       [],
       (error, results) => {
@@ -63,10 +63,10 @@ function createRouter(db) {
   router.get('/workout', function (req, res, next) {
     db.query(
       'SELECT uni.name AS uni , uni.uniId AS uniId, sport.sportId AS sportId, sport.name AS sport, sum(amount) as amount ' +
-      'FROM workout AS workout ' +
-      'JOIN workout_data AS wdata ON wdata.workoutId = workout.workoutId ' +
-      'JOIN university AS uni ON uni.uniId = workout.uniId ' +
-      'JOIN sport AS sport ON sport.sportId = wdata.sportId ' +
+      'FROM WORKOUT AS workout ' +
+      'JOIN WORKOUT_DATA AS wdata ON wdata.workoutId = workout.workoutId ' +
+      'JOIN UNIVERSITY AS uni ON uni.uniId = workout.uniId ' +
+      'JOIN SPORT AS sport ON sport.sportId = wdata.sportId ' +
       'GROUP BY workout.uniId, sportId',
       [],
       (error, results) => {

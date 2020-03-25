@@ -114,8 +114,7 @@
                <thead>
                  <tr>
                    <th class="tableHeader" style="text-align:right;">#</th>
-                   <th class="tableHeader" style="border-left: 20px solid #FFFFFF;">University
-                   </th>
+                   <th class="tableHeader" style="border-left: 20px solid #FFFFFF;">University </th>
                    <th class="tableHeader" style="color:#ec008c;text-align:right;white-space: nowrap;">Push-Ups</th>
                    <th class="tableHeader" style="color:#7ac143;text-align:right;">Situps</th>
                    <th class="tableHeader" style="color:#00aeef;text-align:right;">Squats</th>
@@ -123,32 +122,14 @@
                  </tr>
                </thead>
                <tbody>
-               <tr *ngFor="let data of uniData; index as i">
-                 <th class="row1" scope="row">{{ i + 1 }}</th>
-                 <td class="rowUniversity">{{ uniData.get(i).get(0).uni }}</td>
-                 <td class="row1">{{ uniData.get(i).get(1).amount  }}</td>
-                 <td class="row1">{{ uniData.get(i).get(2).amount  }}</td>
-                 <td class="row1">{{ uniData.get(i).get(3).amount  }} </td>
-                 <td class="row1">{{ uniData.get(i).get(4).amount  }} sec</td>
+               <tr *ngFor="let key of uniData.keys(objs); index as i ">
+                 <td class="row1" scope="row">{{i+1}}</td>
+                 <td class="rowUniversity">{{ uniData.get(key).get(1).uni }}</td>
+                 <td class="row1">{{uniData.get(key).get(1).amount}}</td>
+                 <td class="row1">{{uniData.get(key).get(2).amount}}</td>
+                 <td class="row1">{{uniData.get(key).get(3).amount}} </td>
+                 <td class="row1">{{uniData.get(key).get(4).amount}} sec</td>
                </tr>
-<!--
-                 <tr>
-                   <td class="row1">1</td>
-                   <td class="rowUniversity">TU Wien</td>
-                   <td class="row1">20</td>
-                   <td class="row1">50</td>
-                   <td class="row1">120</td>
-                   <td class="row1">200</td>
-                 </tr>
-
-                 <tr>
-                   <td class="row1">2</td>
-                   <td class="rowUniversity">Boku</td>
-                   <td class="row1">20</td>
-                   <td class="row1">20</td>
-                   <td class="row1">200</td>
-                   <td class="row1">10</td>
-                 </tr> -->
 
                </tbody>
              </table>
@@ -157,8 +138,21 @@
          </div>
        </div>
 
+       <!-- <div class="row my-3">
+        <div class="col-md-12">
+          <ul>
+            <li> {{uniData.get(6).get(1).uni}}</li>
+            <li> {{uniData.get(6).get(1).amount}}</li>
+            <li> {{uniData.get(6).get(2).amount}}</li>
+            <li> {{uniData.get(6).get(3).amount}}</li>
+            <li> {{uniData.get(6).get(4).amount}}</li>
+        </ul>
+        </div>
+      </div> -->
 
 
+
+      
 
 
 
