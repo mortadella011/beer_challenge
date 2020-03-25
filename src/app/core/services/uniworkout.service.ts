@@ -45,8 +45,11 @@ function matches(data: ReducedUniWorkoutData, term: string) {
 
 @Injectable({providedIn: 'root'})
 export class UniworkoutService {
-  private _search$ = new Subject<void>();
   private workoutService: WorkoutService;
+
+  private _loading$ = new BehaviorSubject<boolean>(true);
+  private _search$ = new Subject<void>();
+
   private _state: State = {
     page: 1,
     pageSize: 4,
@@ -69,10 +72,13 @@ export class UniworkoutService {
       this._total$.next(result.total);
     });
 
+    this.reload();
+  }
+
+  reload() {
     this._search$.next();
   }
 
-  private _loading$ = new BehaviorSubject<boolean>(true);
 
   get loading$() {
     return this._loading$.asObservable();

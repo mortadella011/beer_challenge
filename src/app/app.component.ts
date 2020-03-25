@@ -75,6 +75,7 @@ export class AppComponent implements OnInit {
 
   reloadData() {
     this.loadTotalData();
+    this.uniworkoutService.reload();
   }
 
   private loadTotalData() {
