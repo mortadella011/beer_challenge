@@ -106,48 +106,48 @@
           <div *ngIf="dataList$" class="tableUniversitiesOut" style="overflow-x: auto;">
             <table class="tableUniversities">
               <thead>
-              <tr>
-                <th class="tableHeader" style="text-align:right;">#</th>
-                <th (sort)="onSort($event)" class="tableHeader" style="border-left: 20px solid #FFFFFF;">University</th>
-                <th (sort)="onSort($event)" class="tableHeader" sortable="pushups"
+                <tr>
+                  <th class="tableHeader" style="text-align:right;">#</th>
+                  <th (sort)="onSort($event)" class="tableHeader" style="border-left: 20px solid #FFFFFF;">University
+                  </th>
+                  <th (sort)="onSort($event)" class="tableHeader" sortable="pushups"
                     style="color:#ec008c;text-align:right;white-space: nowrap;">Push-Ups
-                </th>
-                <th (sort)="onSort($event)" class="tableHeader" sortable="situps"
+                  </th>
+                  <th (sort)="onSort($event)" class="tableHeader" sortable="situps"
                     style="color:#7ac143;text-align:right;">Situps
-                </th>
-                <th (sort)="onSort($event)" class="tableHeader" sortable="squats"
+                  </th>
+                  <th (sort)="onSort($event)" class="tableHeader" sortable="squats"
                     style="color:#00aeef;text-align:right;">Squats
-                </th>
-                <th (sort)="onSort($event)" class="tableHeader" sortable="planks"
+                  </th>
+                  <th (sort)="onSort($event)" class="tableHeader" sortable="planks"
                     style="color:#f47b20;text-align:right;">Planking
-                </th>
-              </tr>
+                  </th>
+                </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let uni of dataList$ | async;">
-                <td class="row1" scope="row">{{uni.ranking}}</td>
-                <td>
-                  <ngb-highlight [result]="uni.uniName" [term]="uniworkoutService.searchTerm"
-                                 class="rowUniversity"></ngb-highlight>
-                </td>
-                <td class="row1">{{uni.pushUps}}</td>
-                <td class="row1">{{uni.situps}}</td>
-                <td class="row1">{{uni.squats}} </td>
-                <td class="row1">{{uni.planking}} sec</td>
-              </tr>
+                <tr *ngFor="let uni of dataList$ | async;">
+                  <td class="row1" scope="row">{{uni.ranking}}</td>
+                  <td nowrap>
+                    <ngb-highlight [result]="uni.uniName" [term]="uniworkoutService.searchTerm" class="rowUniversity">
+                    </ngb-highlight>
+                  </td>
+                  <td class="row1">{{uni.pushUps}}</td>
+                  <td class="row1">{{uni.situps}}</td>
+                  <td class="row1">{{uni.squats}} </td>
+                  <td class="row1">{{uni.planking}} sec</td>
+                </tr>
 
               </tbody>
             </table>
-            <div class="d-flex justify-content-between p-2">
-              <ngb-pagination
-                [(page)]="uniworkoutService.page" [collectionSize]="(total$ | async)!"
+            <div class="d-none d-lg-flex d-xl-flex justify-content-between p-2 ">
+              <ngb-pagination [(page)]="uniworkoutService.page" [collectionSize]="(total$ | async)!"
                 [pageSize]="uniworkoutService.pageSize">
               </ngb-pagination>
 
               <span *ngIf="uniworkoutService.loading$ | async" class="ml-3" style="color: black">Loading...</span>
 
               <select [(ngModel)]="uniworkoutService.pageSize" class="custom-select" name="pageSize"
-                      style="width: auto">
+                style="width: auto">
                 <option [ngValue]="5">5 universities per page</option>
                 <option [ngValue]="10">10 universities per page</option>
                 <option [ngValue]="15">15 universities per page</option>
@@ -155,8 +155,7 @@
               <div class="form-group form-inline">
                 <label for="searchTerm" style="color: black"> Full text search: </label>
                 <input [(ngModel)]="uniworkoutService.searchTerm" class="form-control ml-2" id="searchTerm"
-                       name="searchTerm"
-                       type="text"/>
+                  name="searchTerm" type="text" />
               </div>
             </div>
           </div>
@@ -251,15 +250,15 @@
 
           <table class="tableStats">
             <tbody>
-            <tr>
-              <td class="row3">Cases:</td>
-              <td class="row3"> {{virusTrackerData.countrydata[0].total_cases}} </td>
-            </tr>
+              <tr>
+                <td class="row3">Cases:</td>
+                <td class="row3"> {{virusTrackerData.countrydata[0].total_cases}} </td>
+              </tr>
 
-            <tr>
-              <td class="row3">Recovered:</td>
-              <td class="row3"> {{virusTrackerData.countrydata[0].total_recovered}} </td>
-            </tr>
+              <tr>
+                <td class="row3">Recovered:</td>
+                <td class="row3"> {{virusTrackerData.countrydata[0].total_recovered}} </td>
+              </tr>
 
             </tbody>
           </table>
@@ -300,7 +299,7 @@
       <div class="form-group">
         <label for="name">Your name</label>
         <input #name="ngModel" [(ngModel)]="model.name" class="form-control" id="name" name="name"
-               placeholder="Tell us your name" required type="text">
+          placeholder="Tell us your name" required type="text">
         <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
           Name is required
         </div>
@@ -310,37 +309,35 @@
         <label for="uni">Your university</label>
 
         <select [(ngModel)]="model.uni" class="form-control" id="uni" name="uni" required>
-          <option *ngFor="let uni of universities"
-                  [ngValue]="uni">{{uni.name}}</option>
+          <option *ngFor="let uni of universities" [ngValue]="uni">{{uni.name}}</option>
         </select>
       </div>
 
       <div class="form-group">
         <label for="pushups">Push-ups</label>
         <input [(ngModel)]="model.pushups" class="form-control" id="pushups" name="pushups"
-               placeholder="How many push-ups did you do?" type="number">
+          placeholder="How many push-ups did you do?" type="number">
       </div>
 
       <div class="form-group">
         <label for="situps">Sit-ups</label>
         <input [(ngModel)]="model.situps" class="form-control" id="situps" name="situps"
-               placeholder="How many sit-ups did you do?" type="number">
+          placeholder="How many sit-ups did you do?" type="number">
       </div>
 
       <div class="form-group">
         <label for="squat">Squats</label>
         <input [(ngModel)]="model.squats" class="form-control" id="squat" name="squat"
-               placeholder="How many squats did you do?" type="number">
+          placeholder="How many squats did you do?" type="number">
       </div>
 
       <div class="form-group">
         <label for="plank">Planking</label>
         <input [(ngModel)]="model.planks" class="form-control" id="plank" name="plank"
-               placeholder="How many seconds did you plank?" type="number">
+          placeholder="How many seconds did you plank?" type="number">
       </div>
       <button (click)="modal.close('Save click');submit(model);" [disabled]="!appWorkoutForm.form.valid"
-              class="btn btn-primary"
-              type="submit">
+        class="btn btn-primary" type="submit">
         Submit
       </button>
     </form>
