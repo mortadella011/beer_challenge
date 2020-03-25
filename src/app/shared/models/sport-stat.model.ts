@@ -39,10 +39,12 @@ export class UniWorkoutData {
 }
 
 export interface ReducedUniWorkoutData {
+  ranking: number;
   uniId: number;
   uniName: string;
   pushUps: number;
   situps: number;
   squats: number;
   planking: number;
+  total: number;
 }

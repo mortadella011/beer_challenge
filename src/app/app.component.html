@@ -109,17 +109,23 @@
               <tr>
                 <th class="tableHeader" style="text-align:right;">#</th>
                 <th (sort)="onSort($event)" class="tableHeader" style="border-left: 20px solid #FFFFFF;">University</th>
-                <th (sort)="onSort($event)" class="tableHeader"
+                <th (sort)="onSort($event)" class="tableHeader" sortable="pushups"
                     style="color:#ec008c;text-align:right;white-space: nowrap;">Push-Ups
                 </th>
-                <th (sort)="onSort($event)" class="tableHeader" style="color:#7ac143;text-align:right;">Situps</th>
-                <th (sort)="onSort($event)" class="tableHeader" style="color:#00aeef;text-align:right;">Squats</th>
-                <th (sort)="onSort($event)" class="tableHeader" style="color:#f47b20;text-align:right;">Planking</th>
+                <th (sort)="onSort($event)" class="tableHeader" sortable="situps"
+                    style="color:#7ac143;text-align:right;">Situps
+                </th>
+                <th (sort)="onSort($event)" class="tableHeader" sortable="squats"
+                    style="color:#00aeef;text-align:right;">Squats
+                </th>
+                <th (sort)="onSort($event)" class="tableHeader" sortable="planks"
+                    style="color:#f47b20;text-align:right;">Planking
+                </th>
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let uni of dataList$ | async; index as i">
-                <td class="row1" scope="row">{{i + 1}}</td>
+              <tr *ngFor="let uni of dataList$ | async;">
+                <td class="row1" scope="row">{{uni.ranking}}</td>
                 <td>
                   <ngb-highlight [result]="uni.uniName" [term]="uniworkoutService.searchTerm"
                                  class="rowUniversity"></ngb-highlight>
@@ -138,18 +144,19 @@
                 [pageSize]="uniworkoutService.pageSize">
               </ngb-pagination>
 
+              <span *ngIf="uniworkoutService.loading$ | async" class="ml-3" style="color: black">Loading...</span>
+
               <select [(ngModel)]="uniworkoutService.pageSize" class="custom-select" name="pageSize"
                       style="width: auto">
-                <option [ngValue]="2">2 items per page</option>
-                <option [ngValue]="4">4 items per page</option>
-                <option [ngValue]="6">6 items per page</option>
+                <option [ngValue]="5">5 universities per page</option>
+                <option [ngValue]="10">10 universities per page</option>
+                <option [ngValue]="15">15 universities per page</option>
               </select>
               <div class="form-group form-inline">
                 <label for="searchTerm" style="color: black"> Full text search: </label>
                 <input [(ngModel)]="uniworkoutService.searchTerm" class="form-control ml-2" id="searchTerm"
                        name="searchTerm"
                        type="text"/>
-                <span *ngIf="uniworkoutService.loading$ | async" class="ml-3" style="color: black">Loading...</span>
               </div>
             </div>
           </div>

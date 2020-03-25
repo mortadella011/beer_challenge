@@ -48,7 +48,7 @@ export class WorkoutService {
     );
   }
 
-  getAllWorkoutsPerUni(): Observable<Set<ReducedUniWorkoutData>> {
+  getAllWorkoutsPerUni(): Observable<ReducedUniWorkoutData[]> {
     return this.http.get<UniWorkoutData[]>(this.urlWorkout).pipe(
       // group by uni
       map(dataList => {
@@ -60,19 +60,33 @@ export class WorkoutService {
           return uniMap;
         }, new Map<number, Map<number, UniWorkoutData>>());
       }),
+      // calculate sums
       map(dataList => {
         const uniList = new Set<ReducedUniWorkoutData>();
         dataList.forEach((value, key) => {
+
+          const pushUps = value.get(1).amount;
+          const situps = value.get(2).amount;
+          const squats = value.get(3).amount;
+          const planking = value.get(4).amount;
+
           uniList.add({
+            ranking: 0,
             uniId: key,
             uniName: value.get(1).uni,
-            pushUps: value.get(1).amount,
-            situps: value.get(2).amount,
-            squats: value.get(3).amount,
-            planking: value.get(4).amount,
+            pushUps: pushUps,
+            situps: situps,
+            squats: squats,
+            planking: planking,
+            total: pushUps + situps + squats + planking
           });
         });
-        return uniList;
+        return Array.from(uniList)
+          .sort((a, b) => b.total - a.total)
+          .map((data, index) => {
+            data.ranking = index + 1;
+            return data;
+          });
       })
     );
   }

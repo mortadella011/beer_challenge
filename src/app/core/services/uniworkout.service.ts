@@ -19,14 +19,21 @@ interface State {
   sortDirection: SortDirection;
 }
 
-const compare = (v1: string, v2: string) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+const compareStr = (v1: string, v2: string) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
+const compareNumb = (v1: number, v2: string | number) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
 function sort(dataList: ReducedUniWorkoutData[], column: SortColumn, direction: string): ReducedUniWorkoutData[] {
   if (direction === '' || column === '') {
     return dataList;
   } else {
     return [...dataList].sort((a, b) => {
-      const res = compare(`${a[column]}`, `${b[column]}`);
+      let res;
+      if (typeof a[column] === 'number') {
+        res = compareNumb(<number>a[column], b[column]);
+      } else {
+        res = compareStr(`${a[column]}`, `${b[column]}`);
+      }
+
       return direction === 'asc' ? res : -res;
     });
   }
@@ -123,7 +130,6 @@ export class UniworkoutService {
   private _search(): Observable<SearchResult> {
     const {sortColumn, sortDirection, pageSize, page, searchTerm} = this._state;
     return this.workoutService.getAllWorkoutsPerUni().pipe(
-      map(list => Array.from(list)),
       map(list => sort(list, sortColumn, sortDirection)),
       map(list => list.filter(data => matches(data, searchTerm))),
       map(list => {

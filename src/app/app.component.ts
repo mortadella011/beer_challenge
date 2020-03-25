@@ -78,7 +78,6 @@ export class AppComponent implements OnInit {
 
   reloadData() {
     this.loadTotalData();
-    // this.loadUniData();
   }
 
   private loadTotalData() {
@@ -90,13 +89,6 @@ export class AppComponent implements OnInit {
       this.totalPlanking = data.has(4) ? data.get(4).amount : 0;
     });
   }
-
-  // private loadUniData() {
-  //   this.workoutService.getAllWorkoutsPerUni().subscribe((data) => {
-  //     console.log(data);
-  //     this.uniData = data;
-  //   });
-  // }
 
   onSort({column, direction}: SortEvent) {
     // resetting other headers
