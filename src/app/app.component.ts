@@ -6,7 +6,6 @@ import {CoronaDataService} from './core/services/corona-data.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {InputDataModel} from './shared/models/input-data.model';
 import {WorkoutService} from './core/services/workout.service';
-import {UniWorkoutData} from './shared/models/sport-stat.model';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +19,7 @@ export class AppComponent implements OnInit {
   virusTrackerData: VirusTrackerData;
   universities: UniversityModel[];
 
-  uniData: Map<number, Map<number, UniWorkoutData>>;
+  uniData: Set<ReducedUniWorkoutData>;
 
   totalPushUps: number;
   totalSitups: number;
@@ -80,7 +79,30 @@ export class AppComponent implements OnInit {
   private loadUniData() {
     this.workoutService.getAllWorkoutsPerUni().subscribe((data) => {
       console.log(data);
-      this.uniData = data;
+
+      const uniList = new Set<ReducedUniWorkoutData>();
+
+      data.forEach((value, key) => {
+        uniList.add({
+          uniId: key,
+          uniName: value.get(1).uni,
+          pushUps: value.get(1).amount,
+          situps: value.get(2).amount,
+          squats: value.get(3).amount,
+          planking: value.get(4).amount,
+        });
+      });
+
+      this.uniData = uniList;
     });
   }
+}
+
+export interface ReducedUniWorkoutData {
+  uniId: number;
+  uniName: string;
+  pushUps: number;
+  situps: number;
+  squats: number;
+  planking: number;
 }
