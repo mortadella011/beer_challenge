@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {VirusTrackerData} from './shared/models/dataset.model';
-import {UniversityDataModel, UniversityModel} from './shared/models/university-data.model';
+import {UniversityModel} from './shared/models/university-data.model';
 import {UniversitiesService} from './core/services/universities.service';
 import {CoronaDataService} from './core/services/corona-data.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -20,10 +20,8 @@ import {UniworkoutService} from './core/services/uniworkout.service';
 export class AppComponent implements OnInit {
   title = 'esn-corona-sport-challenge';
 
-  universityData: UniversityDataModel[];
   virusTrackerData: VirusTrackerData;
   universities: UniversityModel[];
-
 
   totalPushUps: number;
   totalSitups: number;
@@ -58,7 +56,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.universityData = this.uniService.getUniData();
     this.coronaDataService.getCurrentCoronaDataVirusTracker().subscribe(data => this.virusTrackerData = data);
     this.reloadData();
   }
