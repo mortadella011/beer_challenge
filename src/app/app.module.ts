@@ -14,15 +14,17 @@ import {ImpressumComponent} from './shared/components/impressum/impressum.compon
 
 const appRoutes: Routes = [
   {path: 'impressum', component: ImpressumComponent},
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-    data: {title: 'Quarantine Sports Challenge'}
-  },
+  // {
+  //   path: 'dashboard',
+  //   component: DashboardComponent,
+  //   data: {title: 'Quarantine Sports Challenge'}
+  // },
   {
     path: '',
-    redirectTo: '/dashboard',
-    pathMatch: 'full'
+    // redirectTo: '/dashboard',
+    // pathMatch: 'full'
+    component: DashboardComponent,
+    data: {title: 'Quarantine Sports Challenge'}
   }
 ];
 
