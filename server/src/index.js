@@ -6,12 +6,15 @@ const workouts = require('./workouts');
 const university = require('./university');
 const sport = require('./sport');
 
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'esn',
-  password: 'esn_corona_2020',
-  database: 'esn_corona'
-});
+const db_conn_args = {
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'esn',
+  password: process.env.DB_PASSWORD || 'esn_corona_2020',
+  database: process.env.DB_NAME || 'esn_corona'
+}
+console.log(`Connecting to`,db_conn_args)
+
+const connection = mysql.createConnection(db_conn_args);
 
 connection.connect();
 

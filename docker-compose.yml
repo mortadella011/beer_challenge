@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  frontend:
+    image: esn_corona_sport_frontend:latest
+    ports:
+      - 127.0.0.1:8080:80
+
+  backend:
+    image: esn_corona_sport_backend:latest
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=db
+      - DB_USER=esn_corona_spark
+      - DB_PASSWORD=${MYSQL_PASSWORD}
+      - DB_NAME=esn_corona_spark
+    ports:
+      - 127.0.0.1:8081:8080
+
+  db:
+    image: mariadb:10.5
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=esn_corona_spark
+      - MYSQL_USER=esn_corona_spark
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - ./sql/create.sql:/docker-entrypoint-initdb.d/create.sql
+      - ./mysql_data:/var/lib/mysql
