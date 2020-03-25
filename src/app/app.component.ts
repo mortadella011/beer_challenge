@@ -42,13 +42,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.universityData = this.uniService.getUniData();
-
     this.coronaDataService.getCurrentCoronaDataVirusTracker().subscribe(data => this.virusTrackerData = data);
-
-    this.totalPushUps = this.universityData.reduce((stat, uni) => stat + uni.stat[0].stat, 0);
-    this.totalSitups = this.universityData.reduce((stat, uni) => stat + uni.stat[1].stat, 0);
-    this.totalSquats = this.universityData.reduce((stat, uni) => stat + uni.stat[2].stat, 0);
-    this.totalPlanking = this.universityData.reduce((stat, uni) => stat + uni.stat[3].stat, 0);
+    this.reloadData();
   }
 
   open(content) {
@@ -61,6 +56,17 @@ export class AppComponent implements OnInit {
     this.submitted = true;
     this.workoutService.submitWorkout(model).subscribe((res) => {
       console.log(res);
+      this.reloadData();
+    });
+  }
+
+  reloadData() {
+    this.workoutService.getAllWorkouts().subscribe((data) => {
+      console.log(data);
+      this.totalPushUps = data.has(1) ? data.get(1) : 0;
+      this.totalSitups = data.has(2) ? data.get(2) : 0;
+      this.totalSquats = data.has(3) ? data.get(3) : 0;
+      this.totalPlanking = data.has(4) ? data.get(4) : 0;
     });
   }
 }
