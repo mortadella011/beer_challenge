@@ -23,11 +23,10 @@
 
           <h3>Can We Beat Corona?</h3>
           <p>Join the ESN Quarantine Sports Challenge! With this challenge, we want to motivate you to
-            stay
-            fit at home and take care of your health even during these unusual times, where sports
+            stay fit at home and take care of your health, even during these unusual times, where sports
             venues are closed and group activities forbidden.
           </p>
-          <p class="bold">Together we try to beat the current number of Covid-19 cases
+          <p class="bold">Together we try to beat the current number of COVID-19 cases
             in Austria with every exercise.</p>
         </div>
       </div>
@@ -76,7 +75,7 @@
             <div class="col-12 col-sm-12 col-md-8 col-lg-6">
 
               <div *ngIf="virusTrackerData" class="boxb">
-                <div class="boxHeaderBottom">Current Covid-19 Cases in Austria</div>
+                <div class="boxHeaderBottom">Current COVID-19 Cases in Austria</div>
                 <div class="boxNumberBottom" style="color:#2e3192;">
                   {{virusTrackerData.countrydata[0].total_cases}}</div>
               </div>
@@ -98,7 +97,7 @@
 
       <div class="row my-5">
         <div class="col-md-12">
-          <h3>Top Universities</h3>
+          <h3>University Ranking</h3>
 
 
           <div *ngIf="dataList$" class="tableUniversitiesOut" style="overflow-x: auto;">
@@ -180,7 +179,8 @@
           <p>Whenever you do any of these fours exercises, count the number of repetitions (push-ups,
             sit-ups, squats) / the seconds (planking). It doesn't matter whether you are doing the
             exercises as part of an extensive work-out or just these exercises, everything counts!</p>
-          <p>After working-out, submit the numbers in the counter below. All submissions are added up and
+          <p>After working-out, submit the numbers to the 'Submit new Workout' form above. All submissions are added up
+            and
             shown on the dashboard.</p>
         </div>
       </div>
@@ -192,11 +192,10 @@
           <ul>
             <li>To beat Corona!</li>
             <li>We want to have in each exercise category a higher number than there are confirmed
-              Corona cases in
-              Austria!
+              COVID-19 cases in Austria!
             </li>
           </ul>
-          <p>To make this more interesting, there is a second challenge, too:
+          <p>To make this more interesting, there is a second challenge too:
             Beat the other universities! Which of the universities can be the sportiest during the
             quarantine times?
           </p>
@@ -243,7 +242,7 @@
 
       <div *ngIf="virusTrackerData" class="row my-3">
         <div class="col-md-12">
-          <h3>Current Covid-19 Data for Austria</h3>
+          <h3>Current COVID-19 Data for Austria</h3>
 
 
           <table class="tableStats">
