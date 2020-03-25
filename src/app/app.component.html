@@ -1,242 +1,310 @@
-<div class="container">
-  <div class="body1">
-    <div class="bodyInner">
-      <div class="Margin">
-
-        <div class="spacer40"></div>
-
-        <!-- ---------------------------------------------------------------------------------------------------------------------- -->
-
-        <div class="header">
-          Quarantine Sport Challenge
-        </div>
-        <div class="headerSmall">
-          by ESN Buddynetwork TU Wien
-        </div>
-        <div class="spacer40"></div>
-        <div class="spacer40"></div>
-
-        <!-- ---------------------------------------------------------------------------------------------------------------------- -->
-
-        <div class="textHeader">Can We Beat Corona?</div>
-        <div class="spacer5"></div>
-        <div class="text">
-          <p>Join the ESN Quarantine Sport Challenge! With this challenge, we want to motivate you to stay
-            fit at home and take care of your health even during these unusual times, where sports
-            venues are closed and group activities forbidden.<br>
-            <strong><u>Together we try to beat the current number of Covid-19 cases in Austria with every exercise.</u>
-            </strong>
-          </p>
-        </div>
-        <div class="spacer10"></div>
-
-        <!-- ---------------------------------------------------------------------------------------------------------------------- -->
+ <div class="container containerESN">
 
 
-        <div class="textHeader">Total Numbers</div>
-        <div class="spacer10"></div>
-        <div class="boxl">
-          <div class="boxHeader">Push-Ups</div>
-          <div class="boxNumber" style="color:#ec008c;"><strong>{{totalPushUps}}</strong></div>
-        </div>
-        <div class="boxl">
-          <div class="boxHeader">Situps</div>
-          <div class="boxNumber" style="color:#7ac143;"><strong>{{totalSitups}}</strong></div>
-        </div>
-        <div class="boxl">
-          <div class="boxHeader">Squats</div>
-          <div class="boxNumber" style="color:#00aeef;"><strong>{{totalSquats}}</strong></div>
-        </div>
-        <div class="boxr">
-          <div class="boxHeader">Planking</div>
-          <div class="boxNumber" style="color:#f47b20;"><strong>{{totalPlanking}}</strong></div>
-        </div>
+   <div class="row no-gutters marginESN">
+     <div class="col">
 
-        <div style="margin: auto;width:460px;" *ngIf="virusTrackerData">
-          <div class="boxb">
-            <div class="boxHeader" style="margin: 10px 10px 0;">Current Covid-19 Cases in Austria</div>
-            <div class="boxNumber" style="color:#2e3192;margin:0;">
-              <strong>{{virusTrackerData.countrydata[0].total_cases}}</strong></div>
-          </div>
-        </div>
-        <div class="spacer40"></div>
 
-        <!-- ---------------------------------------------------------------------------------------------------------------------- -->
 
-        <div style="text-align: center;">
+       <div class="row mt-3">
+         <div class="col-md-2">
+           <img src="assets/ESNstar_digital_full_colour.png" alt="ESN-Star" class="headerPic">
+         </div>
+         <div class="col-md-10">
+           <div class="header">
+             Quarantine Sports Challenge
+           </div>
+           <div class="headerSmall">
+             by ESN Buddynetwork TU Wien
+           </div>
+         </div>
+       </div>
+
+
+       <div class="row mt-5 mb-3">
+         <div class="col-md-12">
+
+           <h3>Can We Beat Corona?</h3>
+           <p>Join the ESN Quarantine Sports Challenge! With this challenge, we want to motivate you to
+             stay
+             fit at home and take care of your health even during these unusual times, where sports
+             venues are closed and group activities forbidden.
+           </p>
+           <p class="bold">Together we try to beat the current number of Covid-19 cases
+             in Austria with every exercise.</p>
+         </div>
+       </div>
+
+
+
+
+
+       <div class="row my-3">
+
+         <div class="col-xs-12 col-sm-12 col-md-12">
+
+           <div class="row">
+             <div class="col-md-12">
+               <h3>Total Numbers</h3>
+             </div>
+           </div>
+
+           <div class="row">
+             <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+               <div class="box">
+                 <div class="boxHeader" style="white-space: nowrap;">Push-Ups</div>
+                 <div class="boxNumber" style="color:#ec008c;">{{totalPushUps}}</div>
+               </div>
+             </div>
+             <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+               <div class="box">
+                 <div class="boxHeader">Situps</div>
+                 <div class="boxNumber" style="color:#7ac143;">{{totalSitups}}</div>
+               </div>
+             </div>
+
+             <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+               <div class="box">
+                 <div class="boxHeader">Squats</div>
+                 <div class="boxNumber" style="color:#00aeef;">{{totalSquats}}</div>
+               </div>
+             </div>
+             <div class="col-6 col-sm-6 col-md-3 col-lg-3">
+               <div class="box">
+                 <div class="boxHeader">Planking</div>
+                 <div class="boxNumber" style="color:#f47b20;">{{totalPlanking}}</div>
+               </div>
+             </div>
+           </div>
+
+           <div class="row">
+             <div class="col-12 col-sm-12 col-md-2 col-lg-3"></div>
+             <div class="col-12 col-sm-12 col-md-8 col-lg-6">
+
+               <div class="boxb">
+                 <div class="boxHeaderBottom">Current Covid-19 Cases in Austria</div>
+                 <div class="boxNumberBottom" style="color:#2e3192;">
+                   {{virusTrackerData.countrydata[0].total_cases}}</div>
+               </div>
+
+             </div>
+             <div class="col-12 col-sm-12 col-md-2 col-lg-3"></div>
+           </div>
+
+         </div>
+       </div>
+
+
+
+       <div class="row my-5 text-center">
+         <div class="col">
           <a class="btn btn-primary btn-lg" href="#" role="button" (click)="open(content)">Submit new Workout</a>
-        </div>
-        <div class="spacer40"></div>
+         </div>
+       </div>
 
 
-        <!-- ---------------------------------------------------------------------------------------------------------------------- -->
 
-        <div class="textHeader">Top Universities</div>
-        <div class="spacer10"></div>
-        <div class="tableOut1">
-          <table class="table1">
-            <thead>
-            <tr>
-              <th class="tableHeader" style="text-align:right;">#</th>
-              <th class="tableHeader" style="border-left: 20px solid #FFFFFF;">University</th>
-              <th class="tableHeader" style="color:#ec008c;text-align:right;">Push-Ups</th>
-              <th class="tableHeader" style="color:#7ac143;text-align:right;">Situps</th>
-              <th class="tableHeader" style="color:#00aeef;text-align:right;">Squats</th>
-              <th class="tableHeader" style="color:#f47b20;text-align:right;">Planking</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let data of uniData; index as i">
-              <th class="row1" scope="row">{{ i + 1 }}</th>
-              <td class="rowUniversity">{{ uniData.get(i).get(0).uni }}</td>
-              <td class="row1">{{ uniData.get(i).get(1).amount  }}</td>
-              <td class="row1">{{ uniData.get(i).get(2).amount  }}</td>
-              <td class="row1">{{ uniData.get(i).get(3).amount  }} </td>
-              <td class="row1">{{ uniData.get(i).get(4).amount  }} sec</td>
-            </tr>
-
-            </tbody>
-          </table>
-        </div>
-        <div class="spacer40"></div>
+       <div class="row my-5">
+         <div class="col-md-12">
+           <h3>Top Universities</h3>
 
 
-        <!-- ---------------------------------------------------------------------------------------------------------------------- -->
+           <div class="tableUniversitiesOut" style="overflow-x: auto;">
+             <table class="tableUniversities">
+               <thead>
+                 <tr>
+                   <th class="tableHeader" style="text-align:right;">#</th>
+                   <th class="tableHeader" style="border-left: 20px solid #FFFFFF;">University
+                   </th>
+                   <th class="tableHeader" style="color:#ec008c;text-align:right;white-space: nowrap;">Push-Ups</th>
+                   <th class="tableHeader" style="color:#7ac143;text-align:right;">Situps</th>
+                   <th class="tableHeader" style="color:#00aeef;text-align:right;">Squats</th>
+                   <th class="tableHeader" style="color:#f47b20;text-align:right;">Planking</th>
+                 </tr>
+               </thead>
+               <tbody>
+               <tr *ngFor="let data of uniData; index as i">
+                 <th class="row1" scope="row">{{ i + 1 }}</th>
+                 <td class="rowUniversity">{{ uniData.get(i).get(0).uni }}</td>
+                 <td class="row1">{{ uniData.get(i).get(1).amount  }}</td>
+                 <td class="row1">{{ uniData.get(i).get(2).amount  }}</td>
+                 <td class="row1">{{ uniData.get(i).get(3).amount  }} </td>
+                 <td class="row1">{{ uniData.get(i).get(4).amount  }} sec</td>
+               </tr>
+<!--
+                 <tr>
+                   <td class="row1">1</td>
+                   <td class="rowUniversity">TU Wien</td>
+                   <td class="row1">20</td>
+                   <td class="row1">50</td>
+                   <td class="row1">120</td>
+                   <td class="row1">200</td>
+                 </tr>
+
+                 <tr>
+                   <td class="row1">2</td>
+                   <td class="rowUniversity">Boku</td>
+                   <td class="row1">20</td>
+                   <td class="row1">20</td>
+                   <td class="row1">200</td>
+                   <td class="row1">10</td>
+                 </tr> -->
+
+               </tbody>
+             </table>
+           </div>
+
+         </div>
+       </div>
 
 
-        <div class="textHeader">The Rules Are Easy:</div>
-        <div class="spacer5"></div>
-        <div class="text">
-          <p>Whenever you do any of these fours exercises, count the number of repetitions (push-ups,
-            sit-ups, squats) / the seconds (planking). It doesn't matter whether you are doing the
-            exercises as part of an extensive work-out or just these exercises, everything counts!</p>
-          <p>After working-out, submit the numbers in the counter below. All submissions are added up and
-            shown on the dashboard.</p>
-
-        </div>
-        <div class="spacer10"></div>
-
-        <div class="textHeader">What Is the Goal?</div>
-        <div class="spacer5"></div>
-        <div class="text">
-          <ul>
-            <li>To beat Corona!</li>
-            <li>We want to have in each exercise category a higher number than there are confirmed
-              Corona cases in
-              Austria!
-            </li>
-          </ul>
-          <p>To make this more interesting, there is a second challenge, too:
-            Beat the other universities! Which of the universities can be the sportiest during the
-            quarantine times?
-          </p>
 
 
-          <p>Need some inspiration or instructions on how to do the exercises?</p>
-          <ul>
-            <li><a href="https://youtu.be/onaQ0v_J5uU" target="_blank" rel="noopener noreferrer">Sit-up</a></li>
-            <li><a href="https://youtu.be/Eh00_rniF8E" target="_blank" rel="noopener noreferrer">Push-up (narrow)</a>
-            </li>
-            <li><a href="https://youtu.be/m3FTgWtJsFE" target="_blank" rel="noopener noreferrer">Push-up (wide)</a></li>
-            <li><a href="https://youtu.be/aclHkVaku9U" target="_blank" rel="noopener noreferrer">Squat</a></li>
-            <li><a href="https://youtu.be/yeKv5oX_6GY" target="_blank" rel="noopener noreferrer">Planking</a></li>
-          </ul>
-        </div>
-        <div class="spacer40"></div>
 
 
-        <!-- ---------------------------------------------------------------------------------------------------------------------- -->
+
+       <div class="row my-3">
+         <div class="col-md-12">
+           <h3>The Rules Are Easy:</h3>
+           <p>Whenever you do any of these fours exercises, count the number of repetitions (push-ups,
+             sit-ups, squats) / the seconds (planking). It doesn't matter whether you are doing the
+             exercises as part of an extensive work-out or just these exercises, everything counts!</p>
+           <p>After working-out, submit the numbers in the counter below. All submissions are added up and
+             shown on the dashboard.</p>
+         </div>
+       </div>
 
 
-        <div class="textHeader">Recent Workouts</div>
-        <div class="tableOut2">
-          <table class="table2">
-            <tbody>
-            <tr>
-              <td class="row2">Fuchsi made 5 push-ups, 5 squats and 1 sec of planking at 22.3.
-                13:40
-              </td>
-            </tr>
-
-            <tr>
-              <td class="row2">Stefan T made 15 push-ups, 20 squats and 100 sec of planking at
-                22.3. 13:40
-              </td>
-            </tr>
-
-            <tr>
-              <td class="row2">Jenni made 50 push-ups, 500 squats and 1000 sec of planking at
-                22.3. 13:40
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="spacer40"></div>
+       <div class="row my-3">
+         <div class="col-md-12">
+           <h3>What Is the Goal?</h3>
+           <ul>
+             <li>To beat Corona!</li>
+             <li>We want to have in each exercise category a higher number than there are confirmed
+               Corona cases in
+               Austria!</li>
+           </ul>
+           <p>To make this more interesting, there is a second challenge, too:
+             Beat the other universities! Which of the universities can be the sportiest during the
+             quarantine times?
+           </p>
 
 
-        <!-- ---------------------------------------------------------------------------------------------------------------------- -->
+           <p>Need some inspiration or instructions on how to do the exercises?</p>
+           <ul>
+             <li><a href="https://youtu.be/onaQ0v_J5uU" target="_blank">Sit-up</a></li>
+             <li><a href="https://youtu.be/Eh00_rniF8E" target="_blank">Push-up (narrow)</a></li>
+             <li><a href="https://youtu.be/m3FTgWtJsFE" target="_blank">Push-up (wide)</a></li>
+             <li><a href="https://youtu.be/aclHkVaku9U" target="_blank">Squat</a></li>
+             <li><a href="https://youtu.be/yeKv5oX_6GY" target="_blank">Planking</a></li>
+           </ul>
+         </div>
+       </div>
 
-        <!--        <div *ngIf="virusTrackerData">-->
-        <!--          <div class="textHeader">Current Covid-19 Data for Austria</div>-->
-        <!--          <div class="tableOut2">-->
-        <!--            <table class="table2" style="width:500px">-->
-        <!--              <tbody>-->
-        <!--              <tr>-->
-        <!--                <td class="row3">Cases:</td>-->
-        <!--                <td class="row3">{{virusTrackerData.countrydata[0].total_cases}} (+{{virusTrackerData.countrydata[0].total_new_cases_today}})</td>-->
-        <!--              </tr>-->
 
-        <!--              <tr>-->
-        <!--                <td class="row3">Recovered:</td>-->
-        <!--                <td class="row3">{{virusTrackerData.countrydata[0].total_recovered}}</td>-->
-        <!--              </tr>-->
+       <!-- <div class="row my-3">
+         <div class="col-md-12">
+           <h3>Recent Workouts</h3>
 
-        <!--              <tr>-->
-        <!--                <td class="row3">Source:</td>-->
-        <!--                <td class="row3">{{virusTrackerData.info.source}}</td>-->
-        <!--              </tr>-->
+           <table class="tableWorkouts">
+             <tbody>
+               <tr>
+                 <td class="row2" style="border-top: 0px;">Fuchsi made 5 push-ups, 5 squats and 1 sec
+                   of planking at 22.3.
+                   13:40</td>
+               </tr>
 
-        <!--              </tbody>-->
-        <!--            </table>-->
-        <!--          </div>-->
-        <!--          <div class="spacer40"></div>-->
-        <!--          -->
-        <!--          &lt;!&ndash; &#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; &ndash;&gt;-->
+               <tr>
+                 <td class="row2">Stefan T made 15 push-ups, 20 squats and 100 sec of planking at
+                   22.3. 13:40</td>
+               </tr>
 
-        <!--          <div class="text">-->
-        <!--            &#169; All rights reserved for <em>ESN Buddynetwork TU Wien</em> 2020.-->
-        <!--          </div>-->
-        <!--        </div>-->
+               <tr>
+                 <td class="row2">Jenni made 50 push-ups, 500 squats and 1000 sec of planking at
+                   22.3. 13:40</td>
+               </tr>
+             </tbody>
+           </table>
+         </div>
+       </div> -->
 
-        <div class="spacer40"></div>
 
-      </div>
-    </div>
-  </div>
-</div>
+       <div class="row my-3">
+         <div class="col-md-12">
+           <h3>Current Covid-19 Data for Austria</h3>
 
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="workout-modal-title">Submit Workout</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form #appWorkoutForm="ngForm" (ngSubmit)="submit(model)">
-      <div class="form-group">
-        <label for="name">Your name</label>
-        <input type="text" class="form-control" id="name" placeholder="Tell us your name" required
-               [(ngModel)]="model.name" name="name" #name="ngModel">
-        <div [hidden]="name.valid || name.pristine"
-             class="alert alert-danger">
-          Name is required
-        </div>
-      </div>
 
-      <div class="form-group">
-        <label for="uni">Your university</label>
+           <table class="tableStats">
+             <tbody>
+               <tr>
+                 <td class="row3">Cases: </td>
+                 <td class="row3"> {{virusTrackerData.countrydata[0].total_cases}} </td>
+               </tr>
+
+               <tr>
+                 <td class="row3">Recovered: </td>
+                 <td class="row3"> {{virusTrackerData.countrydata[0].total_recovered}} </td>
+               </tr>
+
+             </tbody>
+           </table>
+
+
+
+         </div>
+       </div>
+
+       <div class="row mt-5 mb-3">
+         <div class="col-md-12" style="text-align:left;">
+           <p>&#169; All rights reserved for <i>ESN Buddynetwork TU Wien</i> 2020.
+             <br>
+             <img src="assets/ESNstar_digital_full_colour_safezone.png" alt="ESN-Star" class="footerPic">
+             Made with love at home.
+
+             <!-- <a href="impressum.html" target="_self" style="color:#FFFFFF;">Impressum</a>. -->
+           </p>
+         </div>
+       </div>
+
+
+
+
+
+
+     </div>
+   </div>
+
+
+ </div>
+
+
+
+
+
+
+
+
+
+ <ng-template #content let-modal>
+   <div class="modal-header">
+     <h4 class="modal-title" id="workout-modal-title">Submit Workout</h4>
+     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+       <span aria-hidden="true">&times;</span>
+     </button>
+   </div>
+   <div class="modal-body">
+     <form #appWorkoutForm="ngForm" (ngSubmit)="submit(model)">
+       <div class="form-group">
+         <label for="name">Your name</label>
+         <input type="text" class="form-control" id="name" placeholder="Tell us your name" required
+           [(ngModel)]="model.name" name="name" #name="ngModel">
+         <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+           Name is required
+         </div>
+       </div>
+
+       <div class="form-group">
+         <label for="uni">Your university</label>
 
         <select class="form-control" id="uni" required [(ngModel)]="model.uni" name="uni">
           <option *ngFor="let uni of universities"
@@ -244,23 +312,23 @@
         </select>
       </div>
 
-      <div class="form-group">
-        <label for="pushups">Push-ups</label>
-        <input type="number" class="form-control" id="pushups" placeholder="How many push-ups did you do?"
-               [(ngModel)]="model.pushups" name="pushups">
-      </div>
+       <div class="form-group">
+         <label for="pushups">Push-ups</label>
+         <input type="number" class="form-control" id="pushups" placeholder="How many push-ups did you do?"
+           [(ngModel)]="model.pushups" name="pushups">
+       </div>
 
-      <div class="form-group">
-        <label for="situps">Sit-ups</label>
-        <input type="number" class="form-control" id="situps" placeholder="How many sit-ups did you do?"
-               [(ngModel)]="model.situps" name="situps">
-      </div>
+       <div class="form-group">
+         <label for="situps">Sit-ups</label>
+         <input type="number" class="form-control" id="situps" placeholder="How many sit-ups did you do?"
+           [(ngModel)]="model.situps" name="situps">
+       </div>
 
-      <div class="form-group">
-        <label for="squat">Squats</label>
-        <input type="number" class="form-control" id="squat" placeholder="How many squats did you do?"
-               [(ngModel)]="model.squats" name="squat">
-      </div>
+       <div class="form-group">
+         <label for="squat">Squats</label>
+         <input type="number" class="form-control" id="squat" placeholder="How many squats did you do?"
+           [(ngModel)]="model.squats" name="squat">
+       </div>
 
       <div class="form-group">
         <label for="plank">Planking</label>
@@ -275,4 +343,3 @@
     </form>
   </div>
 </ng-template>
-
