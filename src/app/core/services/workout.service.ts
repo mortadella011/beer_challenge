@@ -17,6 +17,10 @@ export class WorkoutService {
     this.http = http;
   }
 
+  private static safeGetAmount(value, index: number) {
+    return (value.get(index) != null && value.get(index).amount >= 0) ? value.get(index).amount : 0;
+  }
+
   submitWorkout(model: InputDataModel): Observable<any> {
     return this.http.post(this.urlWorkout, {user: model.name, uni: model.uni.uniId})
       .pipe(
@@ -50,10 +54,10 @@ export class WorkoutService {
         const uniList = new Set<ReducedUniWorkoutData>();
         dataList.forEach((value, key) => {
 
-          const pushUps = (value.get(1) != null && value.get(1).amount >= 0) ? value.get(1).amount : 0;
-          const situps = (value.get(2) != null && value.get(2).amount >= 0) ? value.get(2).amount : 0;
-          const squats = (value.get(3) != null && value.get(3).amount >= 0) ? value.get(3).amount : 0;
-          const planking = (value.get(4) != null && value.get(4).amount >= 0) ? value.get(4).amount : 0;
+          const pushUps = WorkoutService.safeGetAmount(value, 1);
+          const situps = WorkoutService.safeGetAmount(value, 2);
+          const squats = WorkoutService.safeGetAmount(value, 3);
+          const planking = WorkoutService.safeGetAmount(value, 4);
 
           uniList.add({
             ranking: 0,
