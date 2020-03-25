@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {VirusTrackerData} from './shared/models/dataset.model';
 import {UniversityDataModel, UniversityModel} from './shared/models/university-data.model';
 import {UniversitiesService} from './core/services/universities.service';
@@ -6,11 +6,16 @@ import {CoronaDataService} from './core/services/corona-data.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {InputDataModel} from './shared/models/input-data.model';
 import {WorkoutService} from './core/services/workout.service';
+import {ReducedUniWorkoutData} from './shared/models/sport-stat.model';
+import {Observable} from 'rxjs';
+import {SortableHeaderDirective, SortEvent} from './shared/directives/sortable.directive';
+import {UniworkoutService} from './core/services/uniworkout.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [UniworkoutService]
 })
 export class AppComponent implements OnInit {
   title = 'esn-corona-sport-challenge';
@@ -19,7 +24,6 @@ export class AppComponent implements OnInit {
   virusTrackerData: VirusTrackerData;
   universities: UniversityModel[];
 
-  uniData: Set<ReducedUniWorkoutData>;
 
   totalPushUps: number;
   totalSitups: number;
@@ -29,17 +33,28 @@ export class AppComponent implements OnInit {
   submitted = false;
   model = new InputDataModel('', null, 0, 0, 0, 0);
 
+  total$: Observable<number>;
+  dataList$: Observable<ReducedUniWorkoutData[]>;
+
+  @ViewChildren(SortableHeaderDirective) headers: QueryList<SortableHeaderDirective>;
+
   private uniService: UniversitiesService;
   private coronaDataService: CoronaDataService;
   private workoutService: WorkoutService;
+  private uniworkoutService: UniworkoutService;
 
   constructor(@Inject(NgbModal) private modalService: NgbModal,
               @Inject(WorkoutService) workoutService: WorkoutService,
               @Inject(UniversitiesService) universitiesService: UniversitiesService,
+              @Inject(UniworkoutService) uniworkoutService: UniworkoutService,
               @Inject(CoronaDataService) coronaDataService: CoronaDataService) {
     this.uniService = universitiesService;
     this.coronaDataService = coronaDataService;
     this.workoutService = workoutService;
+    this.uniworkoutService = uniworkoutService;
+
+    this.dataList$ = uniworkoutService.dataList$;
+    this.total$ = uniworkoutService.total$;
   }
 
   ngOnInit(): void {
@@ -63,7 +78,7 @@ export class AppComponent implements OnInit {
 
   reloadData() {
     this.loadTotalData();
-    this.loadUniData();
+    // this.loadUniData();
   }
 
   private loadTotalData() {
@@ -76,33 +91,22 @@ export class AppComponent implements OnInit {
     });
   }
 
-  private loadUniData() {
-    this.workoutService.getAllWorkoutsPerUni().subscribe((data) => {
-      console.log(data);
+  // private loadUniData() {
+  //   this.workoutService.getAllWorkoutsPerUni().subscribe((data) => {
+  //     console.log(data);
+  //     this.uniData = data;
+  //   });
+  // }
 
-      const uniList = new Set<ReducedUniWorkoutData>();
-
-      data.forEach((value, key) => {
-        uniList.add({
-          uniId: key,
-          uniName: value.get(1).uni,
-          pushUps: value.get(1).amount,
-          situps: value.get(2).amount,
-          squats: value.get(3).amount,
-          planking: value.get(4).amount,
-        });
-      });
-
-      this.uniData = uniList;
+  onSort({column, direction}: SortEvent) {
+    // resetting other headers
+    this.headers.forEach(header => {
+      if (header.sortable !== column) {
+        header.direction = '';
+      }
     });
-  }
-}
 
-export interface ReducedUniWorkoutData {
-  uniId: number;
-  uniName: string;
-  pushUps: number;
-  situps: number;
-  squats: number;
-  planking: number;
+    this.uniworkoutService.sortColumn = column;
+    this.uniworkoutService.sortDirection = direction;
+  }
 }

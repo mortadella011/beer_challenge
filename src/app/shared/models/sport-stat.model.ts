@@ -37,3 +37,12 @@ export class UniWorkoutData {
     this.amount = amount;
   }
 }
+
+export interface ReducedUniWorkoutData {
+  uniId: number;
+  uniName: string;
+  pushUps: number;
+  situps: number;
+  squats: number;
+  planking: number;
+}

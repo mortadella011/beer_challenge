@@ -3,7 +3,7 @@ import {InputDataModel} from '../../shared/models/input-data.model';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {flatMap, map} from 'rxjs/operators';
-import {UniWorkoutData, WorkoutData} from '../../shared/models/sport-stat.model';
+import {ReducedUniWorkoutData, UniWorkoutData, WorkoutData} from '../../shared/models/sport-stat.model';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +48,7 @@ export class WorkoutService {
     );
   }
 
-  getAllWorkoutsPerUni(): Observable<Map<number, Map<number, UniWorkoutData>>> {
+  getAllWorkoutsPerUni(): Observable<Set<ReducedUniWorkoutData>> {
     return this.http.get<UniWorkoutData[]>(this.urlWorkout).pipe(
       // group by uni
       map(dataList => {
@@ -59,6 +59,20 @@ export class WorkoutService {
           uniMap.get(data.uniId).set(data.sportId, data);
           return uniMap;
         }, new Map<number, Map<number, UniWorkoutData>>());
+      }),
+      map(dataList => {
+        const uniList = new Set<ReducedUniWorkoutData>();
+        dataList.forEach((value, key) => {
+          uniList.add({
+            uniId: key,
+            uniName: value.get(1).uni,
+            pushUps: value.get(1).amount,
+            situps: value.get(2).amount,
+            squats: value.get(3).amount,
+            planking: value.get(4).amount,
+          });
+        });
+        return uniList;
       })
     );
   }

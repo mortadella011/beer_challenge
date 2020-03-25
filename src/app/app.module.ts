@@ -7,11 +7,13 @@ import {CommonModule} from '@angular/common';
 import {FooterComponent} from './shared/components/footer/footer.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {SortableHeaderDirective} from './shared/directives/sortable.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent
+    FooterComponent,
+    SortableHeaderDirective
   ],
   imports: [
     BrowserModule,

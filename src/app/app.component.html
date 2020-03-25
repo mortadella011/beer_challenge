@@ -103,22 +103,27 @@
           <h3>Top Universities</h3>
 
 
-          <div *ngIf="uniData" class="tableUniversitiesOut" style="overflow-x: auto;">
+          <div *ngIf="dataList$" class="tableUniversitiesOut" style="overflow-x: auto;">
             <table class="tableUniversities">
               <thead>
               <tr>
                 <th class="tableHeader" style="text-align:right;">#</th>
-                <th class="tableHeader" style="border-left: 20px solid #FFFFFF;">University</th>
-                <th class="tableHeader" style="color:#ec008c;text-align:right;white-space: nowrap;">Push-Ups</th>
-                <th class="tableHeader" style="color:#7ac143;text-align:right;">Situps</th>
-                <th class="tableHeader" style="color:#00aeef;text-align:right;">Squats</th>
-                <th class="tableHeader" style="color:#f47b20;text-align:right;">Planking</th>
+                <th (sort)="onSort($event)" class="tableHeader" style="border-left: 20px solid #FFFFFF;">University</th>
+                <th (sort)="onSort($event)" class="tableHeader"
+                    style="color:#ec008c;text-align:right;white-space: nowrap;">Push-Ups
+                </th>
+                <th (sort)="onSort($event)" class="tableHeader" style="color:#7ac143;text-align:right;">Situps</th>
+                <th (sort)="onSort($event)" class="tableHeader" style="color:#00aeef;text-align:right;">Squats</th>
+                <th (sort)="onSort($event)" class="tableHeader" style="color:#f47b20;text-align:right;">Planking</th>
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let uni of uniData; index as i ">
+              <tr *ngFor="let uni of dataList$ | async; index as i">
                 <td class="row1" scope="row">{{i + 1}}</td>
-                <td class="rowUniversity">{{ uni.uniName }}</td>
+                <td>
+                  <ngb-highlight [result]="uni.uniName" [term]="uniworkoutService.searchTerm"
+                                 class="rowUniversity"></ngb-highlight>
+                </td>
                 <td class="row1">{{uni.pushUps}}</td>
                 <td class="row1">{{uni.situps}}</td>
                 <td class="row1">{{uni.squats}} </td>
@@ -127,6 +132,26 @@
 
               </tbody>
             </table>
+            <div class="d-flex justify-content-between p-2">
+              <ngb-pagination
+                [(page)]="uniworkoutService.page" [collectionSize]="(total$ | async)!"
+                [pageSize]="uniworkoutService.pageSize">
+              </ngb-pagination>
+
+              <select [(ngModel)]="uniworkoutService.pageSize" class="custom-select" name="pageSize"
+                      style="width: auto">
+                <option [ngValue]="2">2 items per page</option>
+                <option [ngValue]="4">4 items per page</option>
+                <option [ngValue]="6">6 items per page</option>
+              </select>
+              <div class="form-group form-inline">
+                <label for="searchTerm" style="color: black"> Full text search: </label>
+                <input [(ngModel)]="uniworkoutService.searchTerm" class="form-control ml-2" id="searchTerm"
+                       name="searchTerm"
+                       type="text"/>
+                <span *ngIf="uniworkoutService.loading$ | async" class="ml-3" style="color: black">Loading...</span>
+              </div>
+            </div>
           </div>
 
         </div>
