@@ -14,7 +14,7 @@ import {ImpressumComponent} from './shared/components/impressum/impressum.compon
 
 const appRoutes: Routes = [
   {path: 'impressum', component: ImpressumComponent},
-  // {
+  // { TODO: enable this once the modal is fixed
   //   path: 'dashboard',
   //   component: DashboardComponent,
   //   data: {title: 'Quarantine Sports Challenge'}

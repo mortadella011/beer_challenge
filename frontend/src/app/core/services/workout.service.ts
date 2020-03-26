@@ -4,13 +4,14 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {flatMap, map} from 'rxjs/operators';
 import {ReducedUniWorkoutData, UniWorkoutData, WorkoutData} from '../../shared/models/sport-stat.model';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkoutService {
 
-  private urlWorkout = 'http://localhost:8080/workout';
+  private urlWorkout = environment.baseUrl + '/workout';
   private http: HttpClient;
 
   constructor(@Inject(HttpClient) http: HttpClient) {

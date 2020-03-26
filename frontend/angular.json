@@ -57,7 +57,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "esn-corona-sport-challenge:build"
+            "browserTarget": "esn-corona-sport-challenge:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
