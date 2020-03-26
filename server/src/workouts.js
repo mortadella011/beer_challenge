@@ -5,7 +5,7 @@ function createRouter(db) {
 
   router.post('/api/workout', (req, res, next) => {
     db.query(
-      'INSERT INTO WORKOUT (date, userName, uniId) VALUES (?,?,?)',
+      'INSERT INTO WORKOUT (date, userName, uniId) VALUES ($1,$2,$3) RETURNING workoutId as "workoutId";',
       [
         new Date(),
         req.body.user,
@@ -17,7 +17,7 @@ function createRouter(db) {
           res.status(500).json({status: 'error'});
         } else {
           res.header("Content-Type", "application/json; charset=utf-8");
-          res.status(200).json(result);
+          res.status(200).json(result.rows[0]);
         }
       }
     );
@@ -25,7 +25,7 @@ function createRouter(db) {
 
   router.post('/api/workout/data', (req, res, next) => {
     db.query(
-      'INSERT INTO WORKOUT_DATA (workoutId, sportId, amount) VALUES (?,?,?)',
+      'INSERT INTO WORKOUT_DATA (workoutId, sportId, amount) VALUES ($1,$2,$3)',
       [
         req.body.workout,
         req.body.sport,
@@ -45,11 +45,11 @@ function createRouter(db) {
 
   router.get('/api/workout/data', function (req, res, next) {
     db.query(
-      'SELECT sport.sportId, sport.name, sum(amount) as amount ' +
+      'SELECT sport.sportId as "sportId", sport.name, sum(amount) as amount ' +
       'FROM WORKOUT AS workout ' +
       'JOIN WORKOUT_DATA AS wdata ON wdata.workoutId = workout.workoutId ' +
       'JOIN SPORT AS sport ON sport.sportId = wdata.sportId ' +
-      'GROUP BY sportId ',
+      'GROUP BY sport.sportId, sport.name',
       [],
       (error, results) => {
         if (error) {
@@ -57,20 +57,20 @@ function createRouter(db) {
           res.status(500).json({status: 'error'});
         } else {
           res.header("Content-Type", "application/json; charset=utf-8");
-          res.status(200).json(results);
+          res.status(200).json(results.rows);
         }
       }
     );
   });
 
   router.get('/api/workout', function (req, res, next) {
-    db.query(
-      'SELECT uni.name AS uni , uni.uniId AS uniId, sport.sportId AS sportId, sport.name AS sport, sum(amount) as amount ' +
-      'FROM WORKOUT AS workout ' +
-      'JOIN WORKOUT_DATA AS wdata ON wdata.workoutId = workout.workoutId ' +
-      'JOIN UNIVERSITY AS uni ON uni.uniId = workout.uniId ' +
-      'JOIN SPORT AS sport ON sport.sportId = wdata.sportId ' +
-      'GROUP BY workout.uniId, sportId',
+    db.query('SELECT uni.name AS uni, uni.uniId AS "uniId", sport.sportId AS "sportId", sport.name AS sport, sum(amount) as amount ' +
+    'FROM WORKOUT AS workout ' +
+    'JOIN WORKOUT_DATA AS wdata ON wdata.workoutId = workout.workoutId ' +
+    'JOIN UNIVERSITY AS uni ON uni.uniId = workout.uniId ' +
+    'JOIN SPORT AS sport ON sport.sportId = wdata.sportId ' +
+    'GROUP BY workout.uniId, wdata.sportId, uni.name, uni.uniId, sport.sportId, sport.name'
+      ,
       [],
       (error, results) => {
         if (error) {
@@ -78,7 +78,7 @@ function createRouter(db) {
           res.status(500).json({status: 'error'});
         } else {
           res.header("Content-Type", "application/json; charset=utf-8");
-          res.status(200).json(results);
+          res.status(200).json(results.rows);
         }
       }
     );
