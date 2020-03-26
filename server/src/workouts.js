@@ -47,7 +47,7 @@ function createRouter(db) {
       'FROM WORKOUT AS workout ' +
       'JOIN WORKOUT_DATA AS wdata ON wdata.workoutId = workout.workoutId ' +
       'JOIN SPORT AS sport ON sport.sportId = wdata.sportId ' +
-      'GROUP BY sportId ',
+      'GROUP BY wdata.sportId ',
       [],
       (error, results) => {
         if (error) {
@@ -67,7 +67,7 @@ function createRouter(db) {
       'JOIN WORKOUT_DATA AS wdata ON wdata.workoutId = workout.workoutId ' +
       'JOIN UNIVERSITY AS uni ON uni.uniId = workout.uniId ' +
       'JOIN SPORT AS sport ON sport.sportId = wdata.sportId ' +
-      'GROUP BY workout.uniId, sportId',
+      'GROUP BY workout.uniId, wdata.sportId',
       [],
       (error, results) => {
         if (error) {
