@@ -16,6 +16,7 @@ function createRouter(db) {
           console.error(error);
           res.status(500).json({status: 'error'});
         } else {
+          res.header("Content-Type", "application/json; charset=utf-8");
           res.status(200).json(result.rows[0]);
         }
       }
@@ -35,6 +36,7 @@ function createRouter(db) {
           console.error(error);
           res.status(500).json({status: 'error'});
         } else {
+          res.header("Content-Type", "application/json; charset=utf-8");
           res.status(200).json({status: 'ok'});
         }
       }
@@ -54,6 +56,7 @@ function createRouter(db) {
           console.log(error);
           res.status(500).json({status: 'error'});
         } else {
+          res.header("Content-Type", "application/json; charset=utf-8");
           res.status(200).json(results.rows);
         }
       }
@@ -74,6 +77,7 @@ function createRouter(db) {
           console.log(error);
           res.status(500).json({status: 'error'});
         } else {
+          res.header("Content-Type", "application/json; charset=utf-8");
           res.status(200).json(results.rows);
         }
       }

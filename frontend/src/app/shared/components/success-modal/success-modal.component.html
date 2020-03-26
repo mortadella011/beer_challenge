@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h4 class="modal-title">Workout successfully submitted!</h4>
+  <button (click)="activeModal.dismiss('Cross click')" aria-label="Close" class="close" type="button">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div>
+    <strong>Your submitted data:</strong>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><strong>{{model.name}}</strong></li>
+    <li class="list-group-item"><strong>{{model.uni.name}}</strong></li>
+    <li class="list-group-item">Push-Ups: {{model.pushups}}</li>
+    <li class="list-group-item">Situps: {{model.situps}}</li>
+    <li class="list-group-item">Squats: {{model.squats}}</li>
+    <li class="list-group-item">Planking: {{model.planks}} sec</li>
+  </ul>
+</div>
+<div class="modal-footer">
+  <button (click)="activeModal.close('Close click')" class="btn btn-success" type="button">Close</button>
+</div>

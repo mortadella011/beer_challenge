@@ -28,6 +28,7 @@
           </p>
           <p class="bold">Together we try to beat the current number of COVID-19 cases
             in Austria with every exercise.</p>
+          <p class="bold">Please be honest with counting!</p>
         </div>
       </div>
 
@@ -65,7 +66,7 @@
             <div class="col-6 col-sm-6 col-md-3 col-lg-3">
               <div class="box">
                 <div class="boxHeader">Planking</div>
-                <div class="boxNumber" style="color:#f47b20;">{{totalPlanking}}</div>
+                <div class="boxNumber" style="color:#f47b20;">{{totalPlanking}} sec</div>
               </div>
             </div>
           </div>
@@ -90,7 +91,7 @@
 
       <div class="row my-5 text-center">
         <div class="col">
-          <a (click)="open(content)" class="btn btn-primary btn-lg" href="#" role="button">Submit new Workout</a>
+          <a (click)="open()" class="btn btn-primary btn-lg" href="#" role="button">Submit new Workout</a>
         </div>
       </div>
 
@@ -103,48 +104,48 @@
           <div *ngIf="dataList$" class="tableUniversitiesOut" style="overflow-x: auto;">
             <table class="tableUniversities">
               <thead>
-                <tr>
-                  <th class="tableHeader" style="text-align:right;">#</th>
-                  <th (sort)="onSort($event)" class="tableHeader" style="border-left: 20px solid #FFFFFF;">University
-                  </th>
-                  <th (sort)="onSort($event)" class="tableHeader" sortable="pushups"
+              <tr>
+                <th class="tableHeader" style="text-align:right;">#</th>
+                <th (sort)="onSort($event)" class="tableHeader" style="border-left: 20px solid #FFFFFF;">University
+                </th>
+                <th (sort)="onSort($event)" class="tableHeader" sortable="pushups"
                     style="color:#ec008c;text-align:right;white-space: nowrap;">Push-Ups
-                  </th>
-                  <th (sort)="onSort($event)" class="tableHeader" sortable="situps"
+                </th>
+                <th (sort)="onSort($event)" class="tableHeader" sortable="situps"
                     style="color:#7ac143;text-align:right;">Situps
-                  </th>
-                  <th (sort)="onSort($event)" class="tableHeader" sortable="squats"
+                </th>
+                <th (sort)="onSort($event)" class="tableHeader" sortable="squats"
                     style="color:#00aeef;text-align:right;">Squats
-                  </th>
-                  <th (sort)="onSort($event)" class="tableHeader" sortable="planks"
+                </th>
+                <th (sort)="onSort($event)" class="tableHeader" sortable="planks"
                     style="color:#f47b20;text-align:right;">Planking
-                  </th>
-                </tr>
+                </th>
+              </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let uni of dataList$ | async;">
-                  <td class="row1" scope="row">{{uni.ranking}}</td>
-                  <td nowrap>
-                    <ngb-highlight [result]="uni.uniName" [term]="uniworkoutService.searchTerm" class="rowUniversity">
-                    </ngb-highlight>
-                  </td>
-                  <td class="row1">{{uni.pushUps}}</td>
-                  <td class="row1">{{uni.situps}}</td>
-                  <td class="row1">{{uni.squats}} </td>
-                  <td class="row1">{{uni.planking}} sec</td>
-                </tr>
+              <tr *ngFor="let uni of dataList$ | async;">
+                <td class="row1" scope="row">{{uni.ranking}}</td>
+                <td nowrap>
+                  <ngb-highlight [result]="uni.uniName" [term]="uniworkoutService.searchTerm" class="rowUniversity">
+                  </ngb-highlight>
+                </td>
+                <td class="row1">{{uni.pushUps}}</td>
+                <td class="row1">{{uni.situps}}</td>
+                <td class="row1">{{uni.squats}} </td>
+                <td class="row1">{{uni.planking}} sec</td>
+              </tr>
 
               </tbody>
             </table>
             <div class="d-none d-lg-flex d-xl-flex justify-content-between p-2 ">
               <ngb-pagination [(page)]="uniworkoutService.page" [collectionSize]="(total$ | async)!"
-                [pageSize]="uniworkoutService.pageSize">
+                              [pageSize]="uniworkoutService.pageSize">
               </ngb-pagination>
 
               <span *ngIf="uniworkoutService.loading$ | async" class="ml-3" style="color: black">Loading...</span>
 
               <select [(ngModel)]="uniworkoutService.pageSize" class="custom-select" name="pageSize"
-                style="width: auto">
+                      style="width: auto">
                 <option [ngValue]="5">5 universities per page</option>
                 <option [ngValue]="10">10 universities per page</option>
                 <option [ngValue]="15">15 universities per page</option>
@@ -152,7 +153,7 @@
               <div class="form-group form-inline">
                 <label for="searchTerm" style="color: black"> Full text search: </label>
                 <input [(ngModel)]="uniworkoutService.searchTerm" class="form-control ml-2" id="searchTerm"
-                  name="searchTerm" type="text" />
+                       name="searchTerm" type="text"/>
               </div>
             </div>
           </div>
@@ -247,20 +248,26 @@
 
           <table class="tableStats">
             <tbody>
-              <tr>
-                <td class="row3">Cases:</td>
-                <td class="row3"> {{virusTrackerData.countrydata[0].total_cases}} </td>
-              </tr>
+            <tr>
+              <td class="row3">Cases:</td>
+              <td class="row3"> {{virusTrackerData.countrydata[0].total_cases}} </td>
+            </tr>
 
-              <tr>
-                <td class="row3">New Cases Today:</td>
-                <td class="row3"> {{virusTrackerData.countrydata[0].total_new_cases_today}} </td>
-              </tr>
+            <tr>
+              <td class="row3">New Cases Today:</td>
+              <td class="row3"> {{virusTrackerData.countrydata[0].total_new_cases_today}} </td>
+            </tr>
 
-              <tr>
-                <td class="row3">Recovered:</td>
-                <td class="row3"> {{virusTrackerData.countrydata[0].total_recovered}} </td>
-              </tr>
+            <tr>
+              <td class="row3">Recovered:</td>
+              <td class="row3"> {{virusTrackerData.countrydata[0].total_recovered}} </td>
+            </tr>
+
+            <tr>
+              <td class="row3">Current data:</td>
+              <td class="row3"><a href="https://info.gesundheitsministerium.at/" style="color:#FFFFFF;">Amtliches
+                Dashboard COVID19</a></td>
+            </tr>
 
             </tbody>
           </table>
@@ -284,64 +291,4 @@
 
     </div>
   </div>
-
-
 </div>
-
-
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="workout-modal-title">Submit Workout</h4>
-    <button (click)="modal.dismiss('Cross click')" aria-label="Close" class="close" type="button">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form #appWorkoutForm="ngForm" (ngSubmit)="submit(model)">
-      <div class="form-group">
-        <label for="name">Your name</label>
-        <input #name="ngModel" [(ngModel)]="model.name" class="form-control" id="name" name="name"
-          placeholder="Tell us your name" required type="text">
-        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
-          Name is required
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="uni">Your university</label>
-
-        <select [(ngModel)]="model.uni" class="form-control" id="uni" name="uni" required>
-          <option *ngFor="let uni of universities" [ngValue]="uni">{{uni.name}}</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="pushups">Push-ups</label>
-        <input [(ngModel)]="model.pushups" class="form-control" id="pushups" name="pushups"
-          placeholder="How many push-ups did you do?" type="number">
-      </div>
-
-      <div class="form-group">
-        <label for="situps">Sit-ups</label>
-        <input [(ngModel)]="model.situps" class="form-control" id="situps" name="situps"
-          placeholder="How many sit-ups did you do?" type="number">
-      </div>
-
-      <div class="form-group">
-        <label for="squat">Squats</label>
-        <input [(ngModel)]="model.squats" class="form-control" id="squat" name="squat"
-          placeholder="How many squats did you do?" type="number">
-      </div>
-
-      <div class="form-group">
-        <label for="plank">Planking</label>
-        <input [(ngModel)]="model.planks" class="form-control" id="plank" name="plank"
-          placeholder="How many seconds did you plank?" type="number">
-      </div>
-      <button (click)="modal.close('Save click');submit(model);" [disabled]="!appWorkoutForm.form.valid"
-        class="btn btn-primary" type="submit">
-        Submit
-      </button>
-    </form>
-  </div>
-</ng-template>

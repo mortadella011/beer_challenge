@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {VirusTrackerData} from '../../models/dataset.model';
 import {UniversityModel} from '../../models/university-data.model';
-import {InputDataModel} from '../../models/input-data.model';
 import {Observable} from 'rxjs';
 import {ReducedUniWorkoutData} from '../../models/sport-stat.model';
 import {SortableHeaderDirective, SortEvent} from '../../directives/sortable.directive';
@@ -10,6 +9,7 @@ import {CoronaDataService} from '../../../core/services/corona-data.service';
 import {WorkoutService} from '../../../core/services/workout.service';
 import {UniworkoutService} from '../../../core/services/uniworkout.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {SubmitModalComponent} from '../submit-modal/submit-modal.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,28 +29,16 @@ export class DashboardComponent implements OnInit {
   totalSquats: number;
   totalPlanking: number;
 
-  submitted = false;
-  model = new InputDataModel('', null, 0, 0, 0, 0);
-
   total$: Observable<number>;
   dataList$: Observable<ReducedUniWorkoutData[]>;
 
   @ViewChildren(SortableHeaderDirective) headers: QueryList<SortableHeaderDirective>;
 
-  public uniService: UniversitiesService;
-  public coronaDataService: CoronaDataService;
-  public workoutService: WorkoutService;
-  public uniworkoutService: UniworkoutService;
-
   constructor(@Inject(NgbModal) private modalService: NgbModal,
-              @Inject(WorkoutService) workoutService: WorkoutService,
-              @Inject(UniversitiesService) universitiesService: UniversitiesService,
-              @Inject(UniworkoutService) uniworkoutService: UniworkoutService,
-              @Inject(CoronaDataService) coronaDataService: CoronaDataService) {
-    this.uniService = universitiesService;
-    this.coronaDataService = coronaDataService;
-    this.workoutService = workoutService;
-    this.uniworkoutService = uniworkoutService;
+              @Inject(WorkoutService) private workoutService: WorkoutService,
+              @Inject(UniversitiesService) private uniService: UniversitiesService,
+              @Inject(UniworkoutService) public uniworkoutService: UniworkoutService,
+              @Inject(CoronaDataService) private coronaDataService: CoronaDataService) {
 
     this.dataList$ = uniworkoutService.dataList$;
     this.total$ = uniworkoutService.total$;
@@ -61,20 +49,17 @@ export class DashboardComponent implements OnInit {
     this.reloadData();
   }
 
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'workout-modal-title'});
-    this.uniService.getUnis().subscribe(data => this.universities = data);
-  }
-
-  submit(model: InputDataModel) {
-    console.log(model);
-    this.submitted = true;
-    this.workoutService.submitWorkout(model).subscribe(() => {
-      this.reloadData();
-    });
+  open() {
+    const modalRef = this.modalService.open(SubmitModalComponent, {ariaLabelledBy: 'workout-modal-title'});
+    this.uniService.getUnis().subscribe(data => modalRef.componentInstance.universities = data);
+    modalRef.result
+      .finally(() => {
+        this.reloadData();
+      });
   }
 
   reloadData() {
+    console.log('reload data');
     this.loadTotalData();
     this.uniworkoutService.reload();
   }
