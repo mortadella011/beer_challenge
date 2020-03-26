@@ -11,6 +11,8 @@ import {SortableHeaderDirective} from './shared/directives/sortable.directive';
 import {DashboardComponent} from './shared/components/dashboard/dashboard.component';
 import {RouterModule, Routes} from '@angular/router';
 import {ImpressumComponent} from './shared/components/impressum/impressum.component';
+import {CustomMaxValidatorDirective} from './shared/directives/custom-max-validator.directive';
+import {CustomMinValidatorDirective} from './shared/directives/custom-min-validator.directive';
 
 const appRoutes: Routes = [
   {path: 'impressum', component: ImpressumComponent},
@@ -34,7 +36,9 @@ const appRoutes: Routes = [
     FooterComponent,
     SortableHeaderDirective,
     DashboardComponent,
-    ImpressumComponent
+    ImpressumComponent,
+    CustomMaxValidatorDirective,
+    CustomMinValidatorDirective
   ],
   imports: [
     RouterModule.forRoot(
