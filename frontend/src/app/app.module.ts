@@ -8,7 +8,7 @@ import {FooterComponent} from './shared/components/footer/footer.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {SortableHeaderDirective} from './shared/directives/sortable.directive';
-import {DashboardComponent} from './shared/components/dashboard/dashboard.component';
+import {DashboardComponent, NgbdModalContent} from './shared/components/dashboard/dashboard.component';
 import {RouterModule, Routes} from '@angular/router';
 import {ImpressumComponent} from './shared/components/impressum/impressum.component';
 import {CustomMaxValidatorDirective} from './shared/directives/custom-max-validator.directive';
@@ -37,6 +37,7 @@ const appRoutes: Routes = [
     SortableHeaderDirective,
     DashboardComponent,
     ImpressumComponent,
+    NgbdModalContent,
     CustomMaxValidatorDirective,
     CustomMinValidatorDirective
   ],

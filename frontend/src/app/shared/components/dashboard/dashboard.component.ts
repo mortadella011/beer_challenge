@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {Component, Inject, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {VirusTrackerData} from '../../models/dataset.model';
 import {UniversityModel} from '../../models/university-data.model';
 import {InputDataModel} from '../../models/input-data.model';
@@ -9,7 +9,41 @@ import {UniversitiesService} from '../../../core/services/universities.service';
 import {CoronaDataService} from '../../../core/services/corona-data.service';
 import {WorkoutService} from '../../../core/services/workout.service';
 import {UniworkoutService} from '../../../core/services/uniworkout.service';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+  selector: 'ngbd-modal-content',
+  template: `
+    <div class="modal-header">
+      <h4 class="modal-title">Workout successfully submitted!</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div>
+        <strong>Your submitted data:</strong>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>{{model.name}}</strong></li>
+        <li class="list-group-item"><strong>{{model.uni.name}}</strong></li>
+        <li class="list-group-item">Push-Ups: {{model.pushups}}</li>
+        <li class="list-group-item">Situps: {{model.situps}}</li>
+        <li class="list-group-item">Squats: {{model.squats}}</li>
+        <li class="list-group-item">Planking: {{model.planks}} sec</li>
+      </ul>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    </div>
+  `
+})
+export class NgbdModalContent {
+  @Input() model: InputDataModel;
+
+  constructor(public activeModal: NgbActiveModal) {
+  }
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -67,11 +101,17 @@ export class DashboardComponent implements OnInit {
   }
 
   submit(model: InputDataModel) {
-    console.log(model);
-    this.submitted = true;
-    this.workoutService.submitWorkout(model).subscribe(() => {
-      this.reloadData();
-    });
+    this.openConfirm(model);
+    // console.log(model);
+    // this.submitted = true;
+    // this.workoutService.submitWorkout(model).subscribe(() => {
+    //   this.reloadData();
+    // });
+  }
+
+  openConfirm(model: InputDataModel) {
+    const modalRef = this.modalService.open(NgbdModalContent);
+    modalRef.componentInstance.model = model;
   }
 
   reloadData() {
