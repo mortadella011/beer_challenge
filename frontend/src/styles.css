@@ -138,7 +138,7 @@
 }
 
 .tableStats {
-  width: 40%;
+  width: 60%;
   background: transparent;
   color: #ffffff;
 }
@@ -228,10 +228,6 @@
       font-size: 150%;
   }
 
-  .tableStats {
-      width: 50%;
-  }
-
   .marginESN{
       margin-right: 1rem;
       margin-left: 1rem;
@@ -268,9 +264,6 @@
       margin-bottom: 2.5%;
       font-size: 150%;
   }
-  .tableStats {
-      width: 30%;
-  }
 }
 
 @media (min-width: 992px) {
@@ -301,9 +294,6 @@
   .boxNumberBottom {
       margin-bottom: 2.5%;
       font-size: 180%;
-  }
-  .tableStats {
-      width: 30%;
   }
 }
 
@@ -406,6 +396,6 @@
   width: 12pt;
   /* height:120px; */
   float: left;
-  margin-top: 5px; 
+  margin-top: 5px;
   margin-right: 1px;
 }
