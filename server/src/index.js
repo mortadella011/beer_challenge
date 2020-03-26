@@ -14,7 +14,7 @@ const db_conn_args = {
   port: 5432
 };
 
-console.log(`Connecting to`, dbConnString);
+console.log(`Connecting to`, db_conn_args);
 const connection = new Pool(db_conn_args)
 
 const port = process.env.PORT || 8080;

@@ -6,7 +6,7 @@ function createRouter(db) {
   router.get('/api/university', function (req, res, next) {
     console.log(db)
     db.query(
-      'SELECT * FROM UNIVERSITY as uni order by uni.name ',
+      'SELECT uniId as "uniId",name FROM UNIVERSITY as uni order by uni.name ',
       (error, results) => {
         if (error) {
           console.log(error);
