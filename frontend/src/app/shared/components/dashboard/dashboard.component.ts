@@ -49,13 +49,10 @@ export class DashboardComponent implements OnInit {
     this.reloadData();
   }
 
-  open() {
+  async open() {
     const modalRef = this.modalService.open(SubmitModalComponent, {ariaLabelledBy: 'workout-modal-title'});
     this.uniService.getUnis().subscribe(data => modalRef.componentInstance.universities = data);
-    modalRef.result
-      .finally(() => {
-        this.reloadData();
-      });
+    modalRef.componentInstance.passEntry.subscribe(model => this.reloadData());
   }
 
   reloadData() {

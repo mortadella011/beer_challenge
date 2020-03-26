@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {InputDataModel} from '../../models/input-data.model';
 import {SuccessModalComponent} from '../success-modal/success-modal.component';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -13,6 +13,7 @@ import {WorkoutService} from '../../../core/services/workout.service';
 export class SubmitModalComponent implements OnInit {
 
   @Input() universities: UniversityModel[];
+  @Output() passEntry: EventEmitter<InputDataModel> = new EventEmitter();
 
   model = new InputDataModel('', null, 0, 0, 0, 0);
 
@@ -25,10 +26,11 @@ export class SubmitModalComponent implements OnInit {
   }
 
   submit(model: InputDataModel) {
-    this.openConfirm(model);
-    console.log(model);
     this.workoutService.submitWorkout(model).subscribe(() => {
+      console.log(model);
+      this.passEntry.emit(model);
     });
+    this.openConfirm(model);
   }
 
   openConfirm(model: InputDataModel) {

@@ -1,21 +1,12 @@
 import {UniversityModel} from './university-data.model';
-import {SportStatModel} from './sport-stat.model';
 
 export class InputDataModel {
-  name: string;
-  uni: UniversityModel;
 
-  pushups: number;
-  situps: number;
-  squats: number;
-  planks: number;
-
-  constructor(name: string, uni: UniversityModel, pushups: number, situps: number, squats: number, planks: number) {
-    this.name = name;
-    this.uni = uni;
-    this.pushups = pushups;
-    this.situps = situps;
-    this.squats = squats;
-    this.planks = planks;
+  constructor(public name: string,
+              public uni: UniversityModel,
+              public pushups: number,
+              public situps: number,
+              public squats: number,
+              public planks: number) {
   }
 }
