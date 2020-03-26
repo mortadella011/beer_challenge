@@ -91,7 +91,7 @@
 
       <div class="row my-5 text-center">
         <div class="col">
-          <a (click)="open(content)" class="btn btn-primary btn-lg" href="#" role="button">Submit new Workout</a>
+          <a (click)="open()" class="btn btn-primary btn-lg" href="#" role="button">Submit new Workout</a>
         </div>
       </div>
 
@@ -291,93 +291,4 @@
 
     </div>
   </div>
-
-
 </div>
-
-
-<ng-template #content let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="workout-modal-title">Submit Workout</h4>
-    <button (click)="modal.dismiss('Cross click')" aria-label="Close" class="close" type="button">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form #appWorkoutForm="ngForm" (ngSubmit)="submit(model)">
-      <div class="form-group">
-        <label for="name">Your name</label>
-        <input #name="ngModel" [(ngModel)]="model.name" class="form-control" id="name" name="name"
-               placeholder="Tell us your name" required type="text">
-        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
-          Name is required
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="uni">Your university</label>
-
-        <select [(ngModel)]="model.uni" class="form-control" id="uni" name="uni" required>
-          <option *ngFor="let uni of universities" [ngValue]="uni">{{uni.name}}</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="pushups">Push-ups</label>
-        <input #pushups="ngModel" [(ngModel)]="model.pushups" class="form-control" customMax="300" customMin="0"
-               id="pushups" name="pushups" placeholder="How many push-ups did you do?" type="number">
-        <div *ngIf="pushups.invalid && (pushups.dirty || pushups.touched)"
-             class="alert alert-danger">
-          This number looks wrong
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="situps">Sit-ups</label>
-        <input #situps="ngModel" [(ngModel)]="model.situps" [ngClass]="{'is-invalid':situps.invalid}"
-               class="form-control" customMax="300"
-               customMin="0" id="situps" name="situps" placeholder="How many sit-ups did you do?"
-               type="number">
-        <div *ngIf="situps.invalid && (situps.dirty || situps.touched)"
-             class="alert alert-danger">
-          This number looks wrong
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="squat">Squats</label>
-        <input #squat="ngModel" [(ngModel)]="model.squats" class="form-control" customMax="300" customMin="0"
-               id="squat" name="squat" placeholder="How many squats did you do?" type="number">
-        <div *ngIf="squat.invalid && (squat.dirty || squat.touched)"
-             class="alert alert-danger">
-          This number looks wrong
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label for="plank">Planking</label>
-        <div class="input-group">
-          <input #plank="ngModel" [(ngModel)]="model.planks" class="form-control" customMax="600" customMin="0"
-                 id="plank" name="plank" placeholder="How many seconds did you plank?" type="number">
-          <div class="input-group-append">
-            <span class="input-group-text">sec</span>
-          </div>
-        </div>
-        <div *ngIf="plank.invalid && (plank.dirty || plank.touched)" class="alert alert-danger">
-          This number looks wrong
-        </div>
-      </div>
-
-      <div>
-        <strong>Please be honest with counting!</strong>
-      </div>
-
-      <div class="float-right">
-        <button (click)="modal.close('Save click');submit(model);" [disabled]="!appWorkoutForm.form.valid"
-                class="btn btn-primary" type="submit">
-          Submit
-        </button>
-      </div>
-    </form>
-  </div>
-</ng-template>

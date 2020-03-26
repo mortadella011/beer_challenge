@@ -1,7 +1,6 @@
-import {Component, Inject, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {Component, Inject, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {VirusTrackerData} from '../../models/dataset.model';
 import {UniversityModel} from '../../models/university-data.model';
-import {InputDataModel} from '../../models/input-data.model';
 import {Observable} from 'rxjs';
 import {ReducedUniWorkoutData} from '../../models/sport-stat.model';
 import {SortableHeaderDirective, SortEvent} from '../../directives/sortable.directive';
@@ -9,41 +8,8 @@ import {UniversitiesService} from '../../../core/services/universities.service';
 import {CoronaDataService} from '../../../core/services/corona-data.service';
 import {WorkoutService} from '../../../core/services/workout.service';
 import {UniworkoutService} from '../../../core/services/uniworkout.service';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-
-@Component({
-  selector: 'ngbd-modal-content',
-  template: `
-    <div class="modal-header">
-      <h4 class="modal-title">Workout successfully submitted!</h4>
-      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <div>
-        <strong>Your submitted data:</strong>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item"><strong>{{model.name}}</strong></li>
-        <li class="list-group-item"><strong>{{model.uni.name}}</strong></li>
-        <li class="list-group-item">Push-Ups: {{model.pushups}}</li>
-        <li class="list-group-item">Situps: {{model.situps}}</li>
-        <li class="list-group-item">Squats: {{model.squats}}</li>
-        <li class="list-group-item">Planking: {{model.planks}} sec</li>
-      </ul>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
-    </div>
-  `
-})
-export class NgbdModalContent {
-  @Input() model: InputDataModel;
-
-  constructor(public activeModal: NgbActiveModal) {
-  }
-}
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {SubmitModalComponent} from '../submit-modal/submit-modal.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -63,28 +29,16 @@ export class DashboardComponent implements OnInit {
   totalSquats: number;
   totalPlanking: number;
 
-  submitted = false;
-  model = new InputDataModel('', null, 0, 0, 0, 0);
-
   total$: Observable<number>;
   dataList$: Observable<ReducedUniWorkoutData[]>;
 
   @ViewChildren(SortableHeaderDirective) headers: QueryList<SortableHeaderDirective>;
 
-  public uniService: UniversitiesService;
-  public coronaDataService: CoronaDataService;
-  public workoutService: WorkoutService;
-  public uniworkoutService: UniworkoutService;
-
   constructor(@Inject(NgbModal) private modalService: NgbModal,
-              @Inject(WorkoutService) workoutService: WorkoutService,
-              @Inject(UniversitiesService) universitiesService: UniversitiesService,
-              @Inject(UniworkoutService) uniworkoutService: UniworkoutService,
-              @Inject(CoronaDataService) coronaDataService: CoronaDataService) {
-    this.uniService = universitiesService;
-    this.coronaDataService = coronaDataService;
-    this.workoutService = workoutService;
-    this.uniworkoutService = uniworkoutService;
+              @Inject(WorkoutService) private workoutService: WorkoutService,
+              @Inject(UniversitiesService) private uniService: UniversitiesService,
+              @Inject(UniworkoutService) public uniworkoutService: UniworkoutService,
+              @Inject(CoronaDataService) private coronaDataService: CoronaDataService) {
 
     this.dataList$ = uniworkoutService.dataList$;
     this.total$ = uniworkoutService.total$;
@@ -95,26 +49,17 @@ export class DashboardComponent implements OnInit {
     this.reloadData();
   }
 
-  open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'workout-modal-title'});
-    this.uniService.getUnis().subscribe(data => this.universities = data);
-  }
-
-  submit(model: InputDataModel) {
-    this.openConfirm(model);
-    // console.log(model);
-    // this.submitted = true;
-    // this.workoutService.submitWorkout(model).subscribe(() => {
-    //   this.reloadData();
-    // });
-  }
-
-  openConfirm(model: InputDataModel) {
-    const modalRef = this.modalService.open(NgbdModalContent);
-    modalRef.componentInstance.model = model;
+  open() {
+    const modalRef = this.modalService.open(SubmitModalComponent, {ariaLabelledBy: 'workout-modal-title'});
+    this.uniService.getUnis().subscribe(data => modalRef.componentInstance.universities = data);
+    modalRef.result
+      .finally(() => {
+        this.reloadData();
+      });
   }
 
   reloadData() {
+    console.log('reload data');
     this.loadTotalData();
     this.uniworkoutService.reload();
   }

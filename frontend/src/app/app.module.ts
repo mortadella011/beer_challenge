@@ -8,11 +8,13 @@ import {FooterComponent} from './shared/components/footer/footer.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {SortableHeaderDirective} from './shared/directives/sortable.directive';
-import {DashboardComponent, NgbdModalContent} from './shared/components/dashboard/dashboard.component';
+import {DashboardComponent} from './shared/components/dashboard/dashboard.component';
 import {RouterModule, Routes} from '@angular/router';
 import {ImpressumComponent} from './shared/components/impressum/impressum.component';
 import {CustomMaxValidatorDirective} from './shared/directives/custom-max-validator.directive';
 import {CustomMinValidatorDirective} from './shared/directives/custom-min-validator.directive';
+import {SuccessModalComponent} from './shared/components/success-modal/success-modal.component';
+import {SubmitModalComponent} from './shared/components/submit-modal/submit-modal.component';
 
 const appRoutes: Routes = [
   {path: 'impressum', component: ImpressumComponent},
@@ -37,9 +39,10 @@ const appRoutes: Routes = [
     SortableHeaderDirective,
     DashboardComponent,
     ImpressumComponent,
-    NgbdModalContent,
     CustomMaxValidatorDirective,
-    CustomMinValidatorDirective
+    CustomMinValidatorDirective,
+    SuccessModalComponent,
+    SubmitModalComponent
   ],
   imports: [
     RouterModule.forRoot(
