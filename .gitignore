@@ -40,3 +40,4 @@ Thumbs.db
 /server/node_modules/
 mysql_data
 .env
+esn*tar

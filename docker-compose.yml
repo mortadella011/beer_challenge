@@ -14,8 +14,6 @@ services:
       - DB_USER=esn_corona_spark
       - DB_PASSWORD=${MYSQL_PASSWORD}
       - DB_NAME=esn_corona_spark
-    ports:
-      - 127.0.0.1:8081:8080
 
   db:
     image: mariadb:10.5

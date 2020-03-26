@@ -1,3 +1,5 @@
 From nginx:1.17.9-alpine
 
-COPY * /usr/share/nginx/html/
+COPY docker_nginx.conf /etc/nginx/conf.d/default.conf
+
+COPY dist/* /usr/share/nginx/html/
