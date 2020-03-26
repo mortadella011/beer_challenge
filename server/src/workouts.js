@@ -3,7 +3,7 @@ const express = require('express');
 function createRouter(db) {
   const router = express.Router();
 
-  router.post('/workout', (req, res, next) => {
+  router.post('/api/workout', (req, res, next) => {
     db.query(
       'INSERT INTO WORKOUT (date, userName, uniId) VALUES (?,?,?)',
       [
@@ -22,7 +22,7 @@ function createRouter(db) {
     );
   });
 
-  router.post('/workout/data', (req, res, next) => {
+  router.post('/api/workout/data', (req, res, next) => {
     db.query(
       'INSERT INTO WORKOUT_DATA (workoutId, sportId, amount) VALUES (?,?,?)',
       [
@@ -41,7 +41,7 @@ function createRouter(db) {
     );
   });
 
-  router.get('/workout/data', function (req, res, next) {
+  router.get('/api/workout/data', function (req, res, next) {
     db.query(
       'SELECT sport.sportId, sport.name, sum(amount) as amount ' +
       'FROM WORKOUT AS workout ' +
@@ -60,7 +60,7 @@ function createRouter(db) {
     );
   });
 
-  router.get('/workout', function (req, res, next) {
+  router.get('/api/workout', function (req, res, next) {
     db.query(
       'SELECT uni.name AS uni , uni.uniId AS uniId, sport.sportId AS sportId, sport.name AS sport, sum(amount) as amount ' +
       'FROM WORKOUT AS workout ' +

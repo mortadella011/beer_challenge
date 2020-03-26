@@ -3,7 +3,7 @@ const express = require('express');
 function createRouter(db) {
   const router = express.Router();
 
-  router.get('/sport', function (req, res, next) {
+  router.get('/api/sport', function (req, res, next) {
     db.query(
       'SELECT * FROM SPORT',
       [],

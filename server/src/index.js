@@ -11,8 +11,8 @@ const db_conn_args = {
   user: process.env.DB_USER || 'esn',
   password: process.env.DB_PASSWORD || 'esn_corona_2020',
   database: process.env.DB_NAME || 'esn_corona'
-}
-console.log(`Connecting to`,db_conn_args)
+};
+console.log(`Connecting to`, db_conn_args);
 
 const connection = mysql.createConnection(db_conn_args);
 
