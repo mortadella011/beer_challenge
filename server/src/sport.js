@@ -12,7 +12,7 @@ function createRouter(db) {
           console.log(error);
           res.status(500).json({status: 'error'});
         } else {
-          res.status(200).json(results);
+          res.status(200).json(results.rows);
         }
       }
     );
