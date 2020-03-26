@@ -65,7 +65,7 @@
             <div class="col-6 col-sm-6 col-md-3 col-lg-3">
               <div class="box">
                 <div class="boxHeader">Planking</div>
-                <div class="boxNumber" style="color:#f47b20;">{{totalPlanking}}</div>
+                <div class="boxNumber" style="color:#f47b20;">{{totalPlanking}} sec</div>
               </div>
             </div>
           </div>
@@ -349,13 +349,18 @@
 
       <div class="form-group">
         <label for="plank">Planking</label>
-        <input #plank="ngModel" [(ngModel)]="model.planks" class="form-control" customMax="600" customMin="0"
-               id="plank" name="plank" placeholder="How many seconds did you plank?" type="number">
-        <div *ngIf="plank.invalid && (plank.dirty || plank.touched)"
-             class="alert alert-danger">
+        <div class="input-group">
+          <input #plank="ngModel" [(ngModel)]="model.planks" class="form-control" customMax="600" customMin="0"
+                 id="plank" name="plank" placeholder="How many seconds did you plank?" type="number">
+          <div class="input-group-append">
+            <span class="input-group-text">sec</span>
+          </div>
+        </div>
+        <div *ngIf="plank.invalid && (plank.dirty || plank.touched)" class="alert alert-danger">
           This number looks wrong
         </div>
       </div>
+
       <button (click)="modal.close('Save click');submit(model);" [disabled]="!appWorkoutForm.form.valid"
               class="btn btn-primary" type="submit">
         Submit
