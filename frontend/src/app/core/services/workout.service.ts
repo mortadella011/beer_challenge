@@ -25,8 +25,8 @@ export class WorkoutService {
   submitWorkout(model: InputDataModel): Observable<any> {
     return this.http.post(this.urlWorkout, {user: model.name, uni: model.uni.uniId})
       .pipe(
-        map((res: any) => res.insertId),
-        flatMap((insertedId: string) => this.submitWorkoutData(model, insertedId)
+        map((res: any) => res.workoutId ),
+        flatMap((workoutId: string) => this.submitWorkoutData(model, workoutId)
         ));
   }
 
