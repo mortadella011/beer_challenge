@@ -28,6 +28,7 @@
           </p>
           <p class="bold">Together we try to beat the current number of COVID-19 cases
             in Austria with every exercise.</p>
+          <p class="bold">Please be honest with counting!</p>
         </div>
       </div>
 
@@ -367,10 +368,16 @@
         </div>
       </div>
 
-      <button (click)="modal.close('Save click');submit(model);" [disabled]="!appWorkoutForm.form.valid"
-              class="btn btn-primary" type="submit">
-        Submit
-      </button>
+      <div>
+        <strong>Please be honest with counting!</strong>
+      </div>
+
+      <div class="float-right">
+        <button (click)="modal.close('Save click');submit(model);" [disabled]="!appWorkoutForm.form.valid"
+                class="btn btn-primary" type="submit">
+          Submit
+        </button>
+      </div>
     </form>
   </div>
 </ng-template>
