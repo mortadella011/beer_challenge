@@ -106,33 +106,34 @@
               <thead>
               <tr>
                 <th class="tableHeader" style="text-align:right;">#</th>
-                <th (sort)="onSort($event)" class="tableHeader" style="border-left: 20px solid #FFFFFF;">University
+                <th (sort)="onSort($event)" class="tableHeader" 
+                    style="text-align:left;border-left: 20px solid #FFFFFF;">University
                 </th>
                 <th (sort)="onSort($event)" class="tableHeader" sortable="pushups"
-                    style="color:#ec008c;text-align:right;white-space: nowrap;">Push-Ups
+                    style="color:#ec008c;text-align:right;white-space: nowrap;border-left: 20px solid #FFFFFF;">Push-Ups
                 </th>
                 <th (sort)="onSort($event)" class="tableHeader" sortable="situps"
-                    style="color:#7ac143;text-align:right;">Situps
+                    style="color:#7ac143;text-align:right;border-left: 20px solid #FFFFFF;">Situps
                 </th>
                 <th (sort)="onSort($event)" class="tableHeader" sortable="squats"
-                    style="color:#00aeef;text-align:right;">Squats
+                    style="color:#00aeef;text-align:right;border-left: 20px solid #FFFFFF;">Squats
                 </th>
                 <th (sort)="onSort($event)" class="tableHeader" sortable="planks"
-                    style="color:#f47b20;text-align:right;">Planking
+                    style="color:#f47b20;text-align:right;border-left: 20px solid #FFFFFF;">Planking
                 </th>
               </tr>
               </thead>
               <tbody>
               <tr *ngFor="let uni of dataList$ | async;">
                 <td class="row1" scope="row">{{uni.ranking}}</td>
-                <td nowrap>
-                  <ngb-highlight [result]="uni.uniName" [term]="uniworkoutService.searchTerm" class="rowUniversity">
+                <td nowrap class="rowUniversity" style="text-align:left;">
+                  <ngb-highlight [result]="uni.uniName" [term]="uniworkoutService.searchTerm">
                   </ngb-highlight>
                 </td>
-                <td class="row1">{{uni.pushUps}}</td>
-                <td class="row1">{{uni.situps}}</td>
-                <td class="row1">{{uni.squats}} </td>
-                <td class="row1">{{uni.planking}} sec</td>
+                <td class="rowData">{{uni.pushUps}}</td>
+                <td class="rowData">{{uni.situps}}</td>
+                <td class="rowData">{{uni.squats}} </td>
+                <td class="rowData">{{uni.planking}} sec</td>
               </tr>
 
               </tbody>
@@ -249,23 +250,23 @@
           <table class="tableStats">
             <tbody>
             <tr>
-              <td class="row3">Cases:</td>
-              <td class="row3"> {{virusTrackerData.countrydata[0].total_cases}} </td>
+              <td class="row31">Cases:</td>
+              <td class="row32"> {{virusTrackerData.countrydata[0].total_cases}} </td>
             </tr>
 
             <tr>
-              <td class="row3">New Cases Today:</td>
-              <td class="row3"> {{virusTrackerData.countrydata[0].total_new_cases_today}} </td>
+              <td class="row31">New Cases Today:</td>
+              <td class="row32"> {{virusTrackerData.countrydata[0].total_new_cases_today}} </td>
             </tr>
 
             <tr>
-              <td class="row3">Recovered:</td>
-              <td class="row3"> {{virusTrackerData.countrydata[0].total_recovered}} </td>
+              <td class="row31">Recovered:</td>
+              <td class="row32"> {{virusTrackerData.countrydata[0].total_recovered}} </td>
             </tr>
 
             <tr>
-              <td class="row3">Current data:</td>
-              <td class="row3"><a href="https://info.gesundheitsministerium.at/" style="color:#FFFFFF;">Amtliches
+              <td class="row31">Current data:</td>
+              <td class="row32"><a href="https://info.gesundheitsministerium.at/" style="color:#FFFFFF;">Amtliches
                 Dashboard COVID19</a></td>
             </tr>
 
