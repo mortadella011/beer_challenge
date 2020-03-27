@@ -1,8 +1,8 @@
 frontend-ng: frontend/src frontend/*.json
 	cd frontend; \
-	ng build --prod;
+	ng build ;
 
-frontend-docker: frontend-ng
+frontend-docker: 
 	docker build -f frontend/Dockerfile -t esn_corona_sport_frontend frontend/ 
 
 backend-docker:
