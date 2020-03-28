@@ -12,8 +12,9 @@ services:
       - NODE_ENV=production
       - DB_HOST=db
       - DB_USER=esn_corona_spark
-      - DB_PASSWORD=${MYSQL_PASSWORD}
+      - DB_PASSWORD=${POSTGRES_PASSWORD}
       - DB_NAME=esn_corona_spark
+      - ADMIN_TOKEN=${ADMIN_TOKEN}
 #    ports:
 #      - 127.0.0.1:8081:8080
 
@@ -22,7 +23,7 @@ services:
     environment:
       - POSTGRES_DATABASE=esn_corona_spark
       - POSTGRES_USER=esn_corona_spark
-      - POSTGRES_PASSWORD=${MYSQL_PASSWORD}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - ./sql/create.sql:/docker-entrypoint-initdb.d/create.sql

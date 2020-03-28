@@ -1,7 +1,3 @@
-/*create USER 'esn' IDENTIFIED BY 'esn_corona_2020';
-GRANT all on esn_corona.* to 'esn';
-ALTER USER esn IDENTIFIED WITH mysql_native_password BY 'esn_corona_2020';
-*/
 DROP TABLE IF EXISTS WORKOUT_DATA;
 DROP TABLE IF EXISTS WORKOUT;
 DROP TABLE IF EXISTS SPORT_USER;
@@ -49,7 +45,7 @@ create TABLE WORKOUT_DATA(
   amount INT NOT NULL,
 
   PRIMARY KEY (workoutDataId),
-  FOREIGN KEY(workoutId) REFERENCES WORKOUT(workoutId),
+  FOREIGN KEY(workoutId) REFERENCES WORKOUT(workoutId) ON DELETE CASCADE,
   FOREIGN KEY(sportId) REFERENCES SPORT(sportId)
 );
 
