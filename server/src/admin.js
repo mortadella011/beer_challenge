@@ -18,7 +18,7 @@ function createRouter(db) {
     next();
   });
 
-  router.get('/api/workout/:id', function (req, res, next) {
+  router.get('/api/admin/workout/:id', function (req, res, next) {
     db.query('SELECT * FROM WORKOUT AS workout JOIN WORKOUT_DATA AS wdata ON wdata.workoutId = workout.workoutId WHERE workout.workoutId=$1',
       [
         req.params.id
@@ -35,7 +35,7 @@ function createRouter(db) {
     );
   });
 
-  router.get('/api/workout/data/raw', function (req, res, next) {
+  router.get('/api/admin/workout/data/raw', function (req, res, next) {
     db.query('SELECT * FROM WORKOUT AS workout JOIN WORKOUT_DATA AS wdata ON wdata.workoutId = workout.workoutId;',
       [],
       (error, results) => {
@@ -50,7 +50,7 @@ function createRouter(db) {
     );
   });
 
-  router.delete('/api/workout/:id', (req, res, next) => {
+  router.delete('/api/admin/workout/:id', (req, res, next) => {
     db.query(
       'DELETE FROM WORKOUT WHERE workoutId=$1;',
       [
@@ -66,6 +66,11 @@ function createRouter(db) {
         }
       }
     );
+  });
+
+// see admin.js for token checks
+  express().use('/api/admin/', router, function (req, res) {
+    res.sendStatus(401)
   });
 
   return router;

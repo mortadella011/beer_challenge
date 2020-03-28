@@ -6,7 +6,7 @@ const workouts = require('./workouts');
 const university = require('./university');
 const sport = require('./sport');
 const admin = require('./admin');
-const Pool = require('pg').Pool
+const Pool = require('pg').Pool;
 
 const db_conn_args = {
   host: process.env.DB_HOST || 'localhost',
