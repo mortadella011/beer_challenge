@@ -65,11 +65,11 @@ function createRouter(db) {
 
   router.get('/api/workout', function (req, res, next) {
     db.query('SELECT uni.name AS uni, uni.uniId AS "uniId", sport.sportId AS "sportId", sport.name AS sport, sum(amount) as amount ' +
-    'FROM WORKOUT AS workout ' +
-    'JOIN WORKOUT_DATA AS wdata ON wdata.workoutId = workout.workoutId ' +
-    'JOIN UNIVERSITY AS uni ON uni.uniId = workout.uniId ' +
-    'JOIN SPORT AS sport ON sport.sportId = wdata.sportId ' +
-    'GROUP BY workout.uniId, wdata.sportId, uni.name, uni.uniId, sport.sportId, sport.name'
+      'FROM WORKOUT AS workout ' +
+      'JOIN WORKOUT_DATA AS wdata ON wdata.workoutId = workout.workoutId ' +
+      'JOIN UNIVERSITY AS uni ON uni.uniId = workout.uniId ' +
+      'JOIN SPORT AS sport ON sport.sportId = wdata.sportId ' +
+      'GROUP BY workout.uniId, wdata.sportId, uni.name, uni.uniId, sport.sportId, sport.name'
       ,
       [],
       (error, results) => {
