@@ -138,23 +138,25 @@
 
               </tbody>
             </table>
-            <div class="d-none d-lg-flex d-xl-flex justify-content-between p-2 ">
+            <div class="d-flex justify-content-between p-2 ">
               <ngb-pagination [(page)]="uniworkoutService.page" [collectionSize]="(total$ | async)!"
-                              [pageSize]="uniworkoutService.pageSize">
+                [pageSize]="uniworkoutService.pageSize">
               </ngb-pagination>
 
               <span *ngIf="uniworkoutService.loading$ | async" class="ml-3" style="color: black">Loading...</span>
-
-              <select [(ngModel)]="uniworkoutService.pageSize" class="custom-select" name="pageSize"
-                      style="width: auto">
+              
+              
+              <select [(ngModel)]="uniworkoutService.pageSize" class="d-none d-sm-flex custom-select" name="pageSize"
+                style="width: auto">
                 <option [ngValue]="5">5 universities per page</option>
                 <option [ngValue]="10">10 universities per page</option>
                 <option [ngValue]="15">15 universities per page</option>
               </select>
-              <div class="form-group form-inline">
+
+              <div class="d-none d-lg-flex form-group form-inline">
                 <label for="searchTerm" style="color: black"> Full text search: </label>
                 <input [(ngModel)]="uniworkoutService.searchTerm" class="form-control ml-2" id="searchTerm"
-                       name="searchTerm" type="text"/>
+                  name="searchTerm" type="text" />
               </div>
             </div>
           </div>
