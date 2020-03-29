@@ -5,7 +5,6 @@ const bearerToken = require('express-bearer-token');
 const workouts = require('./workouts');
 const university = require('./university');
 const sport = require('./sport');
-const user = require('./user');
 const admin = require('./admin');
 const Pool = require('pg').Pool;
 
@@ -29,7 +28,6 @@ const app = express()
   .use(workouts(connection))
   .use(university(connection))
   .use(sport(connection))
-  .use(user(connection))
   .use(admin(connection));
 
 app.listen(port, () => {
