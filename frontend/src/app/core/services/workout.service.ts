@@ -68,7 +68,7 @@ export class WorkoutService {
             situps: situps,
             squats: squats,
             planking: planking,
-            total: pushUps + situps + squats + planking
+            total: parseInt(pushUps) + parseInt(situps) + parseInt(squats) + parseInt(planking)
           });
         });
         return Array.from(uniList)
